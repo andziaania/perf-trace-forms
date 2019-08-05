@@ -1,13 +1,14 @@
 <form submit="onSubmit()">
   <label for="login">Login
-    <input type="text" id="login" required minlength="4" appLoginExistsValidator="test"
+    <input type="text" id="login" name="login"
+        appLoginExistsValidator required minlength="4"
         [(ngModel)]="login" name="login" #loginRefVar="ngModel">
   </label>
   <div *ngIf="loginRefVar.invalid && (loginRefVar.dirty || loginRefVar.touched)"
-      class="alert alert-danger">
-    <span *ngIf="loginRefVar.errors.required">Enter login</span>
-    <span *ngIf="loginRefVar.errors.minlength">Login must be minimum 4 chars length</span>
-    <span *ngIf="loginRefVar.errors.forbiddenName">Login exists</span>
+      class="alert alert-danger">{{loginRefVar.errors | json}}
+    <!-- <span *ngIf="loginRefVar.errors.required">Enter login</span>
+    <span *ngIf="loginRefVar.errors.minlength">Login must be minimum 4 chars length</span> -->
+    <!-- <span *ngIf="loginRefVar.errors.forbiddenName">Login exists</span> -->
 
   </div>
   <label for="password">Password
@@ -19,3 +20,4 @@
   <button type="submit">Submit</button>
 </form>
 
+<!-- appLoginExistsValidator="test" -->

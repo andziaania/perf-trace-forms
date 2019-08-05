@@ -6,6 +6,9 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { LoginExistsValidatorDirective } from './shared/login-exists-validator.directive';
+import { HttpClientModule} from '@angular/common/http';
+import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
+import { InMemoryDataService } from './in-memory-data.service';
 
 @NgModule({
   declarations: [
@@ -17,7 +20,11 @@ import { LoginExistsValidatorDirective } from './shared/login-exists-validator.d
   imports: [
     BrowserModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule,
+    HttpClientInMemoryWebApiModule.forRoot(
+      InMemoryDataService, {dataEncapsulation: false}
+    ),
   ],
   providers: [],
   bootstrap: [AppComponent]
