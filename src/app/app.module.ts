@@ -9,6 +9,11 @@ import { LoginExistsValidatorDirective } from './shared/login-exists-validator.d
 import { HttpClientModule} from '@angular/common/http';
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemoryDataService } from './in-memory-data.service';
+import { NbPasswordAuthStrategy, NbAuthModule } from '@nebular/auth';
+import { AppRoutingModule } from './app-routing.module';
+import { NbThemeModule, NbLayoutModule } from '@nebular/theme';
+
+
 
 @NgModule({
   declarations: [
@@ -25,6 +30,17 @@ import { InMemoryDataService } from './in-memory-data.service';
     HttpClientInMemoryWebApiModule.forRoot(
       InMemoryDataService, {dataEncapsulation: false}
     ),
+    NbThemeModule.forRoot(),
+    NbLayoutModule,
+    NbAuthModule.forRoot({
+      strategies: [
+        NbPasswordAuthStrategy.setup({
+          name: 'email',
+        }),
+      ],
+      forms: {},
+    }),
+    AppRoutingModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
