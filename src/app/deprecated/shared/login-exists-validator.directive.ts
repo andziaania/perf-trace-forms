@@ -1,5 +1,5 @@
-import { LoggerService } from './../logger.service';
-import { LoginService } from './../login.service';
+import { LoggerService } from '../../logger.service';
+import { LoginService } from '../login.service';
 import { Directive, Input } from '@angular/core';
 import { NG_VALIDATORS, Validator, AbstractControl, ValidatorFn } from '@angular/forms';
 import {map, tap} from 'rxjs/operators';
@@ -32,7 +32,7 @@ export class LoginExistsValidatorDirective implements Validator {
 
       console.log(`KONTROLKA ${control.value}`)
       return this.loginService.isLoginExists(control.value).pipe(
-        tap((isLoginExists: boolean) => this.loggerService.log("checkIfLoginExistsValidatorFn", isLoginExists)),
+        tap((isLoginExists: boolean) => this.loggerService.log('checkIfLoginExistsValidatorFn', isLoginExists)),
         map ((isLoginExists: boolean) => isLoginExists ? {'forbiddenName': {value: control.value}} : null)
       ).subscribe();
     };
