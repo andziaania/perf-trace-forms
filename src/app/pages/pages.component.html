@@ -4,7 +4,9 @@
     <nb-sidebar>
         <nb-menu [items]="menu"></nb-menu>
     </nb-sidebar>
-    <nb-layout-column></nb-layout-column>
+    <nb-layout-column>
+      <router-outlet></router-outlet>
+    </nb-layout-column>
     <nb-layout-footer fixed> sdf</nb-layout-footer>
 </nb-layout>
 
