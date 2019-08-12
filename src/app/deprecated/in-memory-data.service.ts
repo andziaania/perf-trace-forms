@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { InMemoryDbService, RequestInfo } from 'angular-in-memory-web-api';
+// import { InMemoryDbService, RequestInfo } from 'angular-in-memory-web-api';
 import { Observable } from 'rxjs';
 
 import { User } from './datatypes/user';
@@ -7,7 +7,7 @@ import { User } from './datatypes/user';
 @Injectable({
   providedIn: 'root'
 })
-export class InMemoryDataService implements InMemoryDbService {
+export class InMemoryDataService { //implements InMemoryDbService {
 
   createDb() {
     // createDb(reqInfo?: RequestInfo): {} | Observable<{}> | Promise<{}> {
