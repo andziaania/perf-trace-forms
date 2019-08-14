@@ -6,6 +6,8 @@ import { UsersComponent } from './users/users.component';
 import { PagesComponent } from './pages.component';
 import { NbLayoutModule, NbMenuModule, NbSidebarModule } from '@nebular/theme';
 
+import { ChartsModule } from 'ng2-charts';
+
 
 @NgModule({
   declarations: [UsersComponent, PagesComponent],
@@ -15,6 +17,7 @@ import { NbLayoutModule, NbMenuModule, NbSidebarModule } from '@nebular/theme';
     NbLayoutModule,
     NbSidebarModule,
     NbMenuModule,
+    ChartsModule,
   ]
 })
 export class PagesModule { }
