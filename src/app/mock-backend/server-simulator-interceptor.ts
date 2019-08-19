@@ -38,18 +38,19 @@ export class ServerSimulatorInterceptor implements HttpInterceptor {
 
   rootRequest(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const { url, method, headers, body } = request;
-    let result: any;
 
     switch (true) {
       case url.match(PATTERNS.USERS_DAILY) && method === GET_METHOD:
-        result = this.usersService.genDailyUsersActivity();
-        break;
+        return ok(this.usersService.genDailyUsersActivity());
       default:
         console.log(`passes throuhg this request: ${request.url}`);
         return next.handle(request);
     }
 
-    return of(new HttpResponse({ status: 200, body: result }));
+    function ok(body?) {
+      return of(new HttpResponse({ status: 200, body }));
+    }
+
   }
 }
 
