@@ -6,8 +6,9 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NbThemeModule, NbLayoutModule, NbButtonModule, NbSidebarModule, NbMenuModule } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS  } from '@angular/common/http';
 import { NbDummyAuthStrategy, NbAuthModule } from '@nebular/auth';
+import { ServerSimulatorInterceptor } from './mock-backend/server-simulator-interceptor';
 
 @NgModule({
   declarations: [
@@ -34,8 +35,16 @@ import { NbDummyAuthStrategy, NbAuthModule } from '@nebular/auth';
       ],
       forms: {},
     }),
+
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ServerSimulatorInterceptor,
+      multi: true
+    }
+    ,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
