@@ -16,9 +16,6 @@ export class UsersService {
 
   getDailyUsersActivity(date: Date): Observable<number[]> {
     const reqUrl = `${this.url}/day/${date.getTime()}`;
-    this.http.get<number[]>(reqUrl).subscribe(); //TODO Usunac
-    // let genDateWithTime = (h?: number, m?: number) => { const d = new Date(); if (h) { d.setHours(h); } if (m) { d.setMinutes(m); } return d; };
-    // return of(new Array(24).fill(0).map(i => Math.floor((Math.random() * (i < 2 ? 100 : 1000)) + 1)));
-    return of(null);
+    return this.http.get<number[]>(reqUrl);
   }
 }

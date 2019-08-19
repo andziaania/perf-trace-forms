@@ -1,4 +1,3 @@
-import { LoggerService } from '../logger.service';
 import { UsersMockService } from './users-mock.service';
 import { HttpRequest, HttpResponse, HttpHandler, HttpEvent, HttpInterceptor, HTTP_INTERCEPTORS } from '@angular/common/http';
 
@@ -9,8 +8,14 @@ import { materialize, delay, dematerialize, mergeMap } from 'rxjs/operators';
 
 const GET_METHOD = 'GET';
 
+const PATTERNS = {
+  USERS_DAILY: /\/users\/day\/\d+$/
+};
 
-@Injectable()
+/**
+ * This interceptor catches specyfic URL requests and returns mock values for them.
+ */
+@Injectable({ providedIn: 'root' })
 export class ServerSimulatorInterceptor implements HttpInterceptor {
 
 
@@ -25,28 +30,26 @@ export class ServerSimulatorInterceptor implements HttpInterceptor {
     console.log(`HTTP mock-backend-interceptor scans request: : ${request.url}`);
     // return next.handle(request);
     return of(null)
-    .pipe(mergeMap(() => rootRequest()))
+    .pipe(mergeMap(() => this.rootRequest(request, next)))
     .pipe(materialize())
     .pipe(delay(500))
     .pipe(dematerialize());
+  }
 
-    function rootRequest(): Observable<HttpEvent<any>> {
-      const { url, method, headers, body } = request;
-      let result: any;
+  rootRequest(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    const { url, method, headers, body } = request;
+    let result: any;
 
-      switch (true) {
-        case url.match(/\/users\/day\/\d+$/) && method === GET_METHOD:
-          // result = this.usersService.genDailyUsersActivity();
-          result = [12,12,423,453]
-          break;
-        default:
-          console.log(`passes throuhg this request: ${request.url}`);
-          return next.handle(request);
-      }
-
-      return of(new HttpResponse({ status: 200, body: result }));
+    switch (true) {
+      case url.match(PATTERNS.USERS_DAILY) && method === GET_METHOD:
+        result = this.usersService.genDailyUsersActivity();
+        break;
+      default:
+        console.log(`passes throuhg this request: ${request.url}`);
+        return next.handle(request);
     }
 
+    return of(new HttpResponse({ status: 200, body: result }));
   }
 }
 

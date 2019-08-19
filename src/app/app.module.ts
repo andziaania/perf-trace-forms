@@ -8,8 +8,8 @@ import { NbThemeModule, NbLayoutModule, NbButtonModule, NbSidebarModule, NbMenuM
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { HttpClientModule, HTTP_INTERCEPTORS  } from '@angular/common/http';
 import { NbDummyAuthStrategy, NbAuthModule } from '@nebular/auth';
-import { ServerSimulatorInterceptor } from './mock-backend/server-simulator-interceptor';
-import {fakeBackendProvider} from './mock-backend';
+
+import { MockBackendModule } from './mock-backend/mock-backend.module';
 
 @NgModule({
   declarations: [
@@ -37,11 +37,10 @@ import {fakeBackendProvider} from './mock-backend';
       forms: {},
     }),
 
+    MockBackendModule.forRoot()
+
   ],
-  providers: [
-      fakeBackendProvider
-    ,
-  ],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
