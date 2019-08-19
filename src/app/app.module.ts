@@ -9,6 +9,7 @@ import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { HttpClientModule, HTTP_INTERCEPTORS  } from '@angular/common/http';
 import { NbDummyAuthStrategy, NbAuthModule } from '@nebular/auth';
 import { ServerSimulatorInterceptor } from './mock-backend/server-simulator-interceptor';
+import {fakeBackendProvider} from './mock-backend';
 
 @NgModule({
   declarations: [
@@ -38,11 +39,7 @@ import { ServerSimulatorInterceptor } from './mock-backend/server-simulator-inte
 
   ],
   providers: [
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: ServerSimulatorInterceptor,
-      multi: true
-    }
+      fakeBackendProvider
     ,
   ],
   bootstrap: [AppComponent]
