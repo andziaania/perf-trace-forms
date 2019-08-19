@@ -15,7 +15,7 @@ const PATTERNS = {
 /**
  * This interceptor catches specyfic URL requests and returns mock values for them.
  */
-@Injectable({ providedIn: 'root' })
+@Injectable()
 export class ServerSimulatorInterceptor implements HttpInterceptor {
 
 
