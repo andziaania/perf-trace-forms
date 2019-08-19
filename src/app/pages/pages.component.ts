@@ -23,7 +23,8 @@ menu: NbMenuItem[] = [
   {
     title: 'FEATURES',
     group: true,
-  },];
+  },
+];
 
   constructor() { }
 
