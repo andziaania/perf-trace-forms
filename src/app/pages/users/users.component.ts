@@ -31,11 +31,11 @@ export class UsersComponent implements AfterViewInit {
       getCurrentMoment: () => new Date().getHours().toString()
     }, {
       type: 'Week',
-      serviceMethod: this.users.getDailyUsersActivity,
+      serviceMethod: this.users.getWeeklyUsersActivity,
       getCurrentMoment: () => new Date().getDay().toString()
     }, {
       type: 'Month',
-      serviceMethod: this.users.getDailyUsersActivity,
+      serviceMethod: this.users.getMonthlyUsersActivity,
       getCurrentMoment: () => new Date().getDay().toString()
     }
   ];
@@ -57,10 +57,9 @@ export class UsersComponent implements AfterViewInit {
     // this.updateChartDataSets(yesterday, SECOND_DATASET_INDEX);
 
     // uzyc mergeMap dla zapytan teraz i poprzedni/
-    
-    this.users.getDailyUsersActivity(today).subscribe(
-      usersActivity => this.usersChart
-          .setChartData([{data: usersActivity, label: 'labela'},])
+
+    timeRangeMethod.call(this.users, today).subscribe(
+      usersActivity => this.usersChart.setChartData([{data: usersActivity, label: 'labela'},])
     );
   }
 

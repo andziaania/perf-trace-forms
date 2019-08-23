@@ -15,8 +15,8 @@
 <div class="flex">
   <div class="flex-item">
 
-    <nb-select [selected]="selectedTimeRange" (selectedChange)="changeSelectedTimeRange($event)">
-      <nb-option *ngFor="let timeRange of TIME_RANGES" [value]="timeRange">{{ timeRange }}</nb-option>
+    <nb-select [selected]="timeRanges[0].type" (selectedChange)="changeSelectedTimeRange($event)">
+      <nb-option *ngFor="let timeRange of timeRanges" [value]="timeRange.type">{{ timeRange.type }}</nb-option>
     </nb-select>
 
     <app-chart-users></app-chart-users>

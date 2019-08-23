@@ -59,15 +59,14 @@ export class ChartUsersComponent {
 
   lineChartPlugins = [pluginAnnotations];   // for vertical line with current date; defined in lineChartOptions
 
+  lineChartLabels: Label[] = new Array(24).fill('').map((item, index) => index.toString());
+
   lineChartData: ChartDataSets[] = [
     { label: 'Today' },
     { label: 'Yesterday' },
   ];
 
-  lineChartLabels: Label[];
-
   constructor() {
-    this.lineChartLabels = new Array(24).fill('').map((item, index) => index.toString());
   }
 
   setChartData(chartData: ChartDataSets[]) {

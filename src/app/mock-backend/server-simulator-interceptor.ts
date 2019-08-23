@@ -9,7 +9,9 @@ import { materialize, delay, dematerialize, mergeMap } from 'rxjs/operators';
 const GET_METHOD = 'GET';
 
 const PATTERNS = {
-  USERS_DAILY: /\/users\/day\/\d+$/
+  USERS_DAILY: /\/users\/day\/\d+$/,
+  USERS_WEEKLY: /\/users\/week\/\d+$/,
+  USERS_MONTHLY: /\/users\/month\/\d+$/
 };
 
 /**
@@ -42,6 +44,10 @@ export class ServerSimulatorInterceptor implements HttpInterceptor {
     switch (true) {
       case url.match(PATTERNS.USERS_DAILY) && method === GET_METHOD:
         return ok(this.usersService.genDailyUsersActivity());
+      case url.match(PATTERNS.USERS_WEEKLY) && method === GET_METHOD:
+        return ok(this.usersService.genWeeklyUsersActivity());
+      case url.match(PATTERNS.USERS_MONTHLY) && method === GET_METHOD:
+        return ok(this.usersService.genMonthlyUsersActivity());
       default:
         console.log(`passes throuhg this request: ${request.url}`);
         return next.handle(request);
