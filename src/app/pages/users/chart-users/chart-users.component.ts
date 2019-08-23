@@ -59,11 +59,11 @@ export class ChartUsersComponent {
 
   lineChartPlugins = [pluginAnnotations];   // for vertical line with current date; defined in lineChartOptions
 
-  lineChartLabels: Label[] = new Array(24).fill('').map((item, index) => index.toString());
+  lineChartLabels: Label[] = this.generateLabels(24);
 
   lineChartData: ChartDataSets[] = [
-    { label: 'Today' },
-    { label: 'Yesterday' },
+    { data: [], label: 'Today' },
+    { data: [], label: 'Previous' },
   ];
 
   constructor() {
@@ -71,13 +71,15 @@ export class ChartUsersComponent {
 
   setChartData(chartData: ChartDataSets[]) {
     this.lineChartData = chartData;
+    this.lineChartLabels = this.generateLabels(chartData[0].data.length);
     this.chart.update();
   }
 
-  updateCurrentIndicator() {
-    // this.lineChartOptions.annotation.annotations[0].value = new Date().getHours().toString();
+  private generateLabels(dataSize: number) {
+    return new Array(dataSize).fill('').map((item, index) => (index + 1).toString());
   }
-  // TODO rozne dla dzien/mies/rok
+
+  // TODO rozne dla dzien/mies/rok i tylko, gdy dla dzis - pobrane z kalendarza
   refreshCurrentTime() {
     this.lineChartOptions.annotation.annotations[0].value
           = new Date().getHours().toString();

@@ -59,14 +59,14 @@ export class UsersComponent implements AfterViewInit {
     // uzyc mergeMap dla zapytan teraz i poprzedni/
 
     timeRangeMethod.call(this.users, today).subscribe(
-      usersActivity => this.usersChart.setChartData([{data: usersActivity, label: 'labela'},])
+      usersActivity => this.usersChart.setChartData([{data: usersActivity, label: `by ${today.toDateString()}`}])
     );
   }
 
 
   // events
   changeSelectedTimeRange(timeRange: string) {
-    for (let timeRangeElement of this.timeRanges) {
+    for (const timeRangeElement of this.timeRanges) {
       if (timeRangeElement.type === timeRange) {
         this.refreshData(timeRangeElement.serviceMethod);
         break;
