@@ -50,4 +50,10 @@ Here, for the record, I put a summary of angular features and libs used in this 
 
 ### Feature module with providers (MockBackendModule)
 - static forRoot(): ModuleWithProviders 
+
+### @ViewChild & AfterViewInit
+- chart components inside components, eg. ChartUsers inside UsersComponent
+
+### MISCELLANEOUS
+- interface (users.component.TimeRange)
  
