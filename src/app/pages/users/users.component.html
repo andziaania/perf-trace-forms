@@ -15,9 +15,11 @@
 <div class="flex">
   <div class="flex-item">
 
-    <nb-select [selected]="timeRanges[0].type" (selectedChange)="changeSelectedTimeRange($event)">
+    <nb-select [selected]="selectedTimeRange.type" (selectedChange)="handleSelectedTimeRangeChange($event)">
       <nb-option *ngFor="let timeRange of timeRanges" [value]="timeRange.type">{{ timeRange.type }}</nb-option>
     </nb-select>
+    <input nbInput [nbDatepicker]="datepicker" value="by {{selectedDate | date:'mediumDate'}}">
+    <nb-datepicker #datepicker [date]="selectedDate" (dateChange)="handleDateChange($event)"></nb-datepicker>
 
     <app-chart-users></app-chart-users>
 

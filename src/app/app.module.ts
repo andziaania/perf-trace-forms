@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { NbThemeModule, NbLayoutModule, NbButtonModule, NbSidebarModule, NbMenuModule } from '@nebular/theme';
+import { NbThemeModule, NbDatepickerModule, NbButtonModule, NbSidebarModule, NbMenuModule } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { HttpClientModule  } from '@angular/common/http';
 import { NbDummyAuthStrategy, NbAuthModule } from '@nebular/auth';
@@ -37,6 +37,7 @@ import { AppComponent } from './app.component';
       ],
       forms: {},
     }),
+    NbDatepickerModule.forRoot(),
 
     // Provides an interceptor that mocks the results for the HTTP requests.
     // Remove if there is a server side for this app implemented.

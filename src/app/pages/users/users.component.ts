@@ -39,17 +39,19 @@ export class UsersComponent implements AfterViewInit {
       getCurrentMoment: () => new Date().getDay().toString()
     }
   ];
+
   selectedTimeRange = this.timeRanges[0];
+
+  selectedDate = new Date();
 
   constructor(private users: UsersService) {
   }
 
   ngAfterViewInit() {
-    this.refreshData(this.users.getDailyUsersActivity);
+    this.refreshData();
   }
 
-  private refreshData(timeRangeMethod: (date: Date) => Observable<number[]>) {
-    const today = new Date();
+  private refreshData() {
     // this.updateChartDataSets(today, FIRST_DATASET_INDEX);
 
     // const yesterday = today;
@@ -58,20 +60,26 @@ export class UsersComponent implements AfterViewInit {
 
     // uzyc mergeMap dla zapytan teraz i poprzedni/
 
-    timeRangeMethod.call(this.users, today).subscribe(
-      usersActivity => this.usersChart.setChartData([{data: usersActivity, label: `by ${today.toDateString()}`}])
+    this.selectedTimeRange.serviceMethod.call(this.users, this.selectedDate).subscribe(
+      usersActivity => this.usersChart.setChartData([{data: usersActivity, label: `by ${this.selectedDate.toDateString()}`}])
     );
   }
 
 
   // events
-  changeSelectedTimeRange(timeRange: string) {
+  handleSelectedTimeRangeChange(timeRange: string) {
     for (const timeRangeElement of this.timeRanges) {
       if (timeRangeElement.type === timeRange) {
-        this.refreshData(timeRangeElement.serviceMethod);
+        this.selectedTimeRange = timeRangeElement;
         break;
       }
     }
+    this.refreshData();
+  }
+
+  handleDateChange(newDate) {
+    this.selectedDate = newDate;
+    this.refreshData();
   }
 
   // // events
