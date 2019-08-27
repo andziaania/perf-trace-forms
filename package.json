@@ -27,7 +27,6 @@
     "angular": "^1.7.8",
     "bootstrap": "^4.3.1",
     "chart.js": "^2.8.0",
-    "chartjs-plugin-annotation": "^0.5.7",
     "codelyzer": "^5.1.0",
     "core-js": "^2.5.4",
     "eva-icons": "^1.1.1",

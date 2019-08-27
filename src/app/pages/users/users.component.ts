@@ -9,7 +9,6 @@ import { map } from 'rxjs/operators';
 interface TimeRange {
   type: string;
   getUsersActivityMethod$: (date: Date) => Observable<number[]>;
-  getCurrentMoment(): string;
   getPreviousMoment(): Date;
 }
 
@@ -26,17 +25,14 @@ export class UsersComponent implements AfterViewInit {
     {
       type: 'Day',
       getUsersActivityMethod$: this.users.getDailyUsersActivity,
-      getCurrentMoment: () => new Date().getHours().toString(),
       getPreviousMoment: () => this.calculatePreviousDateByDays(1),
     }, {
       type: 'Week',
       getUsersActivityMethod$: this.users.getWeeklyUsersActivity,
-      getCurrentMoment: () => new Date().getDay().toString(),
       getPreviousMoment: () => this.calculatePreviousDateByDays(7),
     }, {
       type: 'Month',
       getUsersActivityMethod$: this.users.getMonthlyUsersActivity,
-      getCurrentMoment: () => new Date().getDay().toString(),
       getPreviousMoment: () => {
         const date = this.selectedDate;
         date.setMonth(date.getMonth() - 1);

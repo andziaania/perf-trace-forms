@@ -1,7 +1,6 @@
 import { Component, ViewChild, Input } from '@angular/core';
 import { Color, BaseChartDirective, Label } from 'ng2-charts';
 import { ChartDataSets, ChartOptions } from 'chart.js';
-import * as pluginAnnotations from 'chartjs-plugin-annotation';
 
 const SECOND_DATASET_INDEX = 1;
 
@@ -14,26 +13,9 @@ export class ChartUsersComponent {
 
   @ViewChild(BaseChartDirective, { static: false }) chart: BaseChartDirective;
 
-  lineChartOptions: (ChartOptions & { annotation: any }) = {
+  lineChartOptions: (ChartOptions) = {
     responsive: true,
     maintainAspectRatio: false,
-    annotation: {
-      annotations: [
-        {
-          type: 'line',
-          mode: 'vertical',
-          scaleID: 'x-axis-0',
-          value: '0',
-          borderColor: 'orange',
-          borderWidth: 2,
-          label: {
-            enabled: true,
-            fontColor: 'orange',
-            content: 'now'
-          }
-        },
-      ],
-    },
   };
 
   lineChartColors: Color[] = [
@@ -59,8 +41,6 @@ export class ChartUsersComponent {
 
   lineChartType = 'line';
 
-  lineChartPlugins = [pluginAnnotations];   // for vertical line with current date; defined in lineChartOptions
-
   lineChartLabels: Label[] = this.generateLabels(24);
 
   lineChartData: ChartDataSets[] = [
@@ -74,18 +54,13 @@ export class ChartUsersComponent {
   public setChartData(chartData: ChartDataSets[]) {
     this.lineChartData = chartData;
     this.lineChartLabels = this.generateLabels(chartData[0].data.length);
+
     this.chart.update();
   }
 
   public togglePrevTimeRange() {
     const isHidden = this.chart.isDatasetHidden(SECOND_DATASET_INDEX);
     this.chart.hideDataset(SECOND_DATASET_INDEX, !isHidden);
-  }
-
-  // TODO rozne dla dzien/mies/rok i tylko, gdy dla dzis - pobrane z kalendarza
-  refreshCurrentTime() {
-    this.lineChartOptions.annotation.annotations[0].value
-          = new Date().getHours().toString();
   }
 
 
