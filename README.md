@@ -56,4 +56,5 @@ Here, for the record, I put a summary of angular features and libs used in this 
 
 ### MISCELLANEOUS
 - interface (users.component.TimeRange)
- 
+- DatePipe
+- zip (rxjs)

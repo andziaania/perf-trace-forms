@@ -5,7 +5,7 @@ import { PagesRoutingModule } from './pages-routing.module';
 import { UsersComponent } from './users/users.component';
 import { PagesComponent } from './pages.component';
 import { NbLayoutModule, NbMenuModule, NbSidebarModule, NbSelectModule, NbDatepickerModule, NbButtonModule,
-        NbInputModule } from '@nebular/theme';
+        NbInputModule, NbToggleModule } from '@nebular/theme';
 
 import { ChartsModule } from 'ng2-charts';
 import { ChartUsersComponent } from './users/chart-users/chart-users.component';
@@ -25,8 +25,7 @@ import { ChartUsersComponent } from './users/chart-users/chart-users.component';
     NbDatepickerModule,
     NbButtonModule,
     NbInputModule,
-
-
+    NbToggleModule,
 
   ]
 })

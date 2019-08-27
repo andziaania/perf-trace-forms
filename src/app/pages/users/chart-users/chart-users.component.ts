@@ -3,6 +3,8 @@ import { Color, BaseChartDirective, Label } from 'ng2-charts';
 import { ChartDataSets, ChartOptions } from 'chart.js';
 import * as pluginAnnotations from 'chartjs-plugin-annotation';
 
+const SECOND_DATASET_INDEX = 1;
+
 @Component({
   selector: 'app-chart-users',
   templateUrl: './chart-users.component.html',
@@ -63,20 +65,21 @@ export class ChartUsersComponent {
 
   lineChartData: ChartDataSets[] = [
     { data: [], label: 'Today' },
-    { data: [], label: 'Previous' },
+    { data: [], label: 'Prev' },
   ];
 
   constructor() {
   }
 
-  setChartData(chartData: ChartDataSets[]) {
+  public setChartData(chartData: ChartDataSets[]) {
     this.lineChartData = chartData;
     this.lineChartLabels = this.generateLabels(chartData[0].data.length);
     this.chart.update();
   }
 
-  private generateLabels(dataSize: number) {
-    return new Array(dataSize).fill('').map((item, index) => (index + 1).toString());
+  public togglePrevTimeRange() {
+    const isHidden = this.chart.isDatasetHidden(SECOND_DATASET_INDEX);
+    this.chart.hideDataset(SECOND_DATASET_INDEX, !isHidden);
   }
 
   // TODO rozne dla dzien/mies/rok i tylko, gdy dla dzis - pobrane z kalendarza
@@ -85,12 +88,17 @@ export class ChartUsersComponent {
           = new Date().getHours().toString();
   }
 
+
   // events
-  public chartClicked({ event, active }: { event: MouseEvent, active: {}[] }): void {
+  chartClicked({ event, active }: { event: MouseEvent, active: {}[] }): void {
     console.log(event, active);
   }
 
-  public chartHovered({ event, active }: { event: MouseEvent, active: {}[] }): void {
+  chartHovered({ event, active }: { event: MouseEvent, active: {}[] }): void {
     console.log(event, active);
+  }
+
+  private generateLabels(dataSize: number) {
+    return new Array(dataSize).fill('').map((item, index) => (index + 1).toString());
   }
 }

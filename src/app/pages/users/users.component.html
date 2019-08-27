@@ -20,7 +20,7 @@
     </nb-select>
     <input nbInput [nbDatepicker]="datepicker" value="by {{selectedDate | date:'mediumDate'}}">
     <nb-datepicker #datepicker [date]="selectedDate" (dateChange)="handleDateChange($event)"></nb-datepicker>
-
+    <nb-toggle (checkedChange)="handleShowPreviousInRange($event)" labelPosition="right" checked="true">Show previous</nb-toggle>
     <app-chart-users></app-chart-users>
 
   </div>
