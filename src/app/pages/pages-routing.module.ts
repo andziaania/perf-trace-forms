@@ -2,7 +2,6 @@ import { PagesComponent } from './pages.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { UsersComponent } from './users/users.component';
-import { ExampleComponent } from './example/example.component';
 
 
 const routes: Routes = [
