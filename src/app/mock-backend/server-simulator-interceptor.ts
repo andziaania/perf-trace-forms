@@ -2,7 +2,7 @@ import { UsersMockService } from './users-mock.service';
 import { HttpRequest, HttpResponse, HttpHandler, HttpEvent, HttpInterceptor, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { Injectable } from '@angular/core';
-import { Observable, of, throwError } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { materialize, delay, dematerialize, mergeMap } from 'rxjs/operators';
 
 
@@ -32,9 +32,9 @@ export class ServerSimulatorInterceptor implements HttpInterceptor {
     console.log(`HTTP mock-backend-interceptor scans request: : ${request.url}`);
     // return next.handle(request);
     return of(null)
-    .pipe(mergeMap(() => this.rootRequest(request, next)))
-    .pipe(materialize())
-    .pipe(delay(500))
+      .pipe(mergeMap(() => this.rootRequest(request, next)))
+      .pipe(materialize())
+      .pipe(delay(500))
     .pipe(dematerialize());
   }
 
