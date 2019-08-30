@@ -5,14 +5,15 @@ import { PagesRoutingModule } from './pages-routing.module';
 import { UsersComponent } from './users/users.component';
 import { PagesComponent } from './pages.component';
 import { NbLayoutModule, NbMenuModule, NbSidebarModule, NbSelectModule, NbDatepickerModule, NbButtonModule,
-        NbInputModule, NbToggleModule } from '@nebular/theme';
+        NbInputModule, NbToggleModule, NbCardModule, NbCheckboxModule } from '@nebular/theme';
 
 import { ChartsModule } from 'ng2-charts';
 import { ChartUsersComponent } from './users/chart-users/chart-users.component';
+import { OnOffButtonDirective } from './shared/on-off-button.directive';
 
 
 @NgModule({
-  declarations: [UsersComponent, PagesComponent, ChartUsersComponent],
+  declarations: [UsersComponent, PagesComponent, ChartUsersComponent, OnOffButtonDirective],
   imports: [
     CommonModule,
     PagesRoutingModule,
@@ -26,6 +27,8 @@ import { ChartUsersComponent } from './users/chart-users/chart-users.component';
     NbButtonModule,
     NbInputModule,
     NbToggleModule,
+    NbCardModule,
+    NbCheckboxModule,
 
   ]
 })

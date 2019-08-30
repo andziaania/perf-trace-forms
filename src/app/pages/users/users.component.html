@@ -1,4 +1,23 @@
 
+
+  <nb-card size="large" class="chart-card">
+    <nb-card-header>
+      <nb-select [selected]="selectedTimeRange.type" (selectedChange)="handleSelectedTimeRangeChange($event)" size="tiny">
+        <nb-option *ngFor="let timeRange of timeRanges" [value]="timeRange.type">{{ timeRange.type }}</nb-option>
+      </nb-select>
+      <input nbInput [nbDatepicker]="datepicker" value="by {{selectedDate | date:'mediumDate'}}" fieldSize="tiny">
+      <nb-datepicker #datepicker [date]="selectedDate" (dateChange)="handleDateChange($event)"></nb-datepicker>
+      <button nbButton (click)="handleShowPreviousInRange($event)" size="tiny" [outline]="showPreviousTimeRange" status="info">Show previous</button>
+
+    </nb-card-header>
+
+    <nb-card-body>
+      <pt-chart-users></pt-chart-users>
+    </nb-card-body>
+
+  </nb-card>
+
+
     <div class="row">
       <div class="col-md-6">tyetete
         <!-- <ngx-profit-card></ngx-profit-card> -->
@@ -15,13 +34,7 @@
 <div class="flex">
   <div class="flex-item">
 
-    <nb-select [selected]="selectedTimeRange.type" (selectedChange)="handleSelectedTimeRangeChange($event)">
-      <nb-option *ngFor="let timeRange of timeRanges" [value]="timeRange.type">{{ timeRange.type }}</nb-option>
-    </nb-select>
-    <input nbInput [nbDatepicker]="datepicker" value="by {{selectedDate | date:'mediumDate'}}">
-    <nb-datepicker #datepicker [date]="selectedDate" (dateChange)="handleDateChange($event)"></nb-datepicker>
-    <nb-toggle (checkedChange)="handleShowPreviousInRange($event)" labelPosition="right" checked="true">Show previous</nb-toggle>
-    <app-chart-users></app-chart-users>
+
 
   </div>
   <!-- <div class="flex-item">

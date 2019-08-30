@@ -45,6 +45,8 @@ export class UsersComponent implements AfterViewInit {
 
   selectedDate = new Date();
 
+  showPreviousTimeRange = true;
+
   constructor(private users: UsersService) {
   }
 
@@ -85,6 +87,7 @@ export class UsersComponent implements AfterViewInit {
   }
 
   handleShowPreviousInRange(isShow: boolean) {
+    this.showPreviousTimeRange = this.showPreviousTimeRange ? false : true;
     this.usersChart.togglePrevTimeRange();
   }
 
