@@ -5,7 +5,7 @@ import { ChartDataSets, ChartOptions } from 'chart.js';
 const SECOND_DATASET_INDEX = 1;
 
 @Component({
-  selector: 'app-chart-users',
+  selector: 'pt-chart-users',
   templateUrl: './chart-users.component.html',
   styleUrls: ['./chart-users.component.scss']
 })

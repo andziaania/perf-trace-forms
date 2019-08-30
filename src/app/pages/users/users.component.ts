@@ -13,7 +13,7 @@ interface TimeRange {
 }
 
 @Component({
-  selector: 'app-users',
+  selector: 'pt-users',
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.scss']
 })

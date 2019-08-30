@@ -3,7 +3,7 @@ import { NbMenuItem } from '@nebular/theme';
 import { APP_MENU } from './pages-menu';
 
 @Component({
-  selector: 'app-pages',
+  selector: 'pt-pages',
   templateUrl: './pages.component.html',
   styleUrls: ['./pages.component.scss']
 })
