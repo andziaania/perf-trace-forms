@@ -1,13 +1,26 @@
 
-
-  <nb-card size="large" class="chart-card">
-    <nb-card-header>
-      <nb-select [selected]="selectedTimeRange.type" (selectedChange)="handleSelectedTimeRangeChange($event)" size="tiny">
-        <nb-option *ngFor="let timeRange of timeRanges" [value]="timeRange.type">{{ timeRange.type }}</nb-option>
+  <nb-card class="chart-card">
+      <nb-card-body>
+      <nb-select [selected]="selectedTimeRange" (selectedChange)="handleSelectedTimeRangeChange($event)" size="tiny">
+        <nb-option *ngFor="let timeRange of timeRanges" [value]="timeRange">{{ timeRange }}</nb-option>
       </nb-select>
       <input nbInput [nbDatepicker]="datepicker" value="by {{selectedDate | date:'mediumDate'}}" fieldSize="tiny">
       <nb-datepicker #datepicker [date]="selectedDate" (dateChange)="handleDateChange($event)"></nb-datepicker>
-      <button nbButton (click)="handleShowPreviousInRange($event)" size="tiny" [outline]="showPreviousTimeRange" status="info">Show previous</button>
+    </nb-card-body>
+  </nb-card>
+
+  <pt-users-total-card [date]="selectedDate" [timeRange]="selectedTimeRange"></pt-users-total-card>
+
+
+  <!-- <nb-card class="chart-card">
+    <nb-card-header>
+      <span>New / Returning users</span>
+      <button nbButton (click)="handleShowNewUsers($event)" size="tiny" status="info"
+            [ngClass]="{'transparentBg': !isShowNewUsers}">Show new users</button>
+      <button nbButton (click)="handleShowReturningUsers($event)" size="tiny" status="info"
+            [ngClass]="{'transparentBg': !isShowReturningUsers}">Show returning users</button>
+      <button nbButton (click)="handleShowTotalUsers($event)" size="tiny" status="info"
+            [ngClass]="{'transparentBg': !isShowTotalUsers}">Show total</button>
 
     </nb-card-header>
 
@@ -15,7 +28,7 @@
       <pt-chart-users></pt-chart-users>
     </nb-card-body>
 
-  </nb-card>
+  </nb-card> -->
 
 
     <div class="row">

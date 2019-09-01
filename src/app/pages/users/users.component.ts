@@ -1,3 +1,4 @@
+import { ChartDataSets } from 'chart.js';
 import { UsersService } from './../../data-services/users.service';
 import { Component, AfterViewInit, ViewChild } from '@angular/core';
 import { Observable, zip } from 'rxjs';
@@ -6,12 +7,6 @@ import { ChartUsersComponent } from './chart-users/chart-users.component';
 import { map } from 'rxjs/operators';
 
 
-interface TimeRange {
-  type: string;
-  getUsersActivityMethod$: (date: Date) => Observable<number[]>;
-  getPreviousMoment(): Date;
-}
-
 @Component({
   selector: 'pt-users',
   templateUrl: './users.component.html',
@@ -19,76 +14,56 @@ interface TimeRange {
 })
 export class UsersComponent implements AfterViewInit {
 
-  @ViewChild(ChartUsersComponent, {static: false}) usersChart: ChartUsersComponent;
-
-  timeRanges: TimeRange[] = [
-    {
-      type: 'Day',
-      getUsersActivityMethod$: this.users.getDailyUsersActivity,
-      getPreviousMoment: () => this.calculatePreviousDateByDays(1),
-    }, {
-      type: 'Week',
-      getUsersActivityMethod$: this.users.getWeeklyUsersActivity,
-      getPreviousMoment: () => this.calculatePreviousDateByDays(7),
-    }, {
-      type: 'Month',
-      getUsersActivityMethod$: this.users.getMonthlyUsersActivity,
-      getPreviousMoment: () => {
-        const date = this.selectedDate;
-        date.setMonth(date.getMonth() - 1);
-        return date;
-      }
-    }
-  ];
+  timeRanges = ['Day', 'Week', 'Month'];
 
   selectedTimeRange = this.timeRanges[0];
 
   selectedDate = new Date();
 
-  showPreviousTimeRange = true;
-
   constructor(private users: UsersService) {
   }
 
   ngAfterViewInit() {
-    this.refreshData();
+    // this.refreshTotalData();
+    // this.refreshNewReturningData();
   }
 
   /**
    * Calling asynchronously data services of users activity in the current and the previous period
    */
-  private refreshData() {
-    zip(
-      this.selectedTimeRange.getUsersActivityMethod$.call(this.users, this.selectedDate),
-      this.selectedTimeRange.getUsersActivityMethod$.call(this.users, this.selectedTimeRange.getPreviousMoment())
-    ).pipe(
-      map(([datasetCurr, datasetPrev]: [number[], number[]]) => this.usersChart.setChartData([
-        { data: datasetCurr, label: `By ${this.selectedDate.toDateString()}`},
-        { data: datasetPrev, label: 'Previous'}
-      ]))
-    ).subscribe();
-  }
+  // private refreshNewReturningData() {
+  //   zip(
+  //     this.selectedTimeRange.getUsersActivityMethod$.call(this.users, this.selectedDate),
+  //     this.selectedTimeRange.getUsersActivityMethod$.call(this.users, this.selectedTimeRange.getPreviousMoment())
+  //   ).pipe(
+  //     map(([datasetCurr, datasetPrev]: [number[], number[]]) => [
+  //       { data: datasetCurr, label: `By ${this.selectedDate.toDateString()}`},
+  //       { data: datasetPrev, label: 'Previous'}
+  //     ])
+  //   ).subscribe((newData) => this.usersChart.setChartData(newData));
+  // }
+
 
 
   // events
   handleSelectedTimeRangeChange(timeRange: string) {
-    for (const timeRangeElement of this.timeRanges) {
-      if (timeRangeElement.type === timeRange) {
-        this.selectedTimeRange = timeRangeElement;
-        break;
-      }
-    }
-    this.refreshData();
+    this.selectedTimeRange = timeRange;
+    //event emitter
+
+
+    // for (const timeRangeElement of this.timeRanges) {
+    //   if (timeRangeElement.type === timeRange) {
+    //     this.selectedTimeRange = timeRangeElement;
+    //     break;
+    //   }
+    // }
+    // this.refreshTotalData();
   }
 
-  handleDateChange(newDate) {
+  handleDateChange(newDate: Date) {
+    //event emitter
     this.selectedDate = newDate;
-    this.refreshData();
-  }
-
-  handleShowPreviousInRange(isShow: boolean) {
-    this.showPreviousTimeRange = this.showPreviousTimeRange ? false : true;
-    this.usersChart.togglePrevTimeRange();
+    // this.refreshTotalData();
   }
 
 
@@ -110,10 +85,4 @@ export class UsersComponent implements AfterViewInit {
   //   this.lineChartLabels[2] = ['1st Line', '2nd Line'];
   //   // this.chart.update();
   // }
-
-  private calculatePreviousDateByDays(days: number): Date {
-    const date = this.selectedDate;
-    date.setDate(date.getDate() - days);
-    return date;
-  }
 }

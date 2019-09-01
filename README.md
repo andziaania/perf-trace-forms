@@ -54,6 +54,10 @@ Here, for the record, I put a summary of angular features and libs used in this 
 ### @ViewChild & AfterViewInit
 - chart components inside components, eg. ChartUsers inside UsersComponent
 
+### Intercept input property changes with ngOnChanges()
+https://angular.io/guide/component-interaction#intercept-input-property-changes-with-ngonchanges
+- in users-total-card.component & users-new-vs-returning-card.component
+
 ### MISCELLANEOUS
 - interface (users.component.TimeRange)
 - DatePipe
