@@ -54,30 +54,26 @@ export class UsersTotalComponent implements AfterViewInit, OnChanges, OnInit  {
 
   constructor(private users: UsersService) { }
 
-  ngOnInit() {
-    this.setSelectedTimeRangeActions();
-  }
+  ngOnInit() { }
 
   ngAfterViewInit() {
     this.refreshTotalData();
   }
 
+  /**
+   * Refreshing the chart after input properties change.
+   */
   ngOnChanges(changes: {[propKey: string]: SimpleChange}) {
-    console.log("ngOnChanges")
     // getting the value of changed properties
-    let log: string[] = [];
     for (let propName in changes) {
+      if (propName === 'timeRange') {
+        this.setSelectedTimeRangeActions();
+      }
       let changedProp = changes[propName];
-      let to = JSON.stringify(changedProp.currentValue);
-      if (changedProp.isFirstChange()) {
-        log.push(`Initial value of ${propName} set to ${to}`);
-      } else {
-        let from = JSON.stringify(changedProp.previousValue);
-        log.push(`${propName} changed from ${from} to ${to}`);
+      if (!changedProp.isFirstChange()) {
         this.refreshTotalData();
       }
     }
-    console.log(log.join(', '));
   }
 
   /**
@@ -90,45 +86,31 @@ export class UsersTotalComponent implements AfterViewInit, OnChanges, OnInit  {
     ).pipe(
       map(([datasetCurr, datasetPrev]: [number[], number[]]) => [
         { data: datasetCurr, label: `By ${this.date.toDateString()}`},
-        { data: datasetPrev, label: 'Previous'}
+        { data: datasetPrev, label: `Previous ${this.timeRange}`}
       ])
     ).subscribe((newData) => this.usersChart.setChartData(newData));
   }
 
-
-  public setSelectedTimeRangeActions() {
-    console.log(this.timeRange)
-    for (const timeRangeActionsElement of this.timeRangeActionsTypes) {
-      if (timeRangeActionsElement.type === this.timeRange) {
-        this.selectedTimeRangeActions = timeRangeActionsElement;
-        break;
-      }
-      console.error("No TIME RANGE defined")
-    }
-    // console.log(timeRangeActionsElement);
-    // this.refreshTotalData();
-  }
-
-  // public handleSelectedTimeRangeChange(timeRange: string) {
-  //   for (const timeRangeElement of this.timeRanges) {
-  //     if (timeRangeElement.type === timeRange) {
-  //       this.selectedTimeRange = timeRangeElement;
-  //       break;
-  //     }
-  //   }
-  //   this.refreshTotalData();
-  // }
 
   // event handlers
 
   handleShowPreviousInRange(isShow: boolean) {
     this.isShowPreviousInTimeRange = !this.isShowPreviousInTimeRange;
     this.usersChart.togglePrevTimeRange();
-    console.log(this.isShowPreviousInTimeRange);
   }
 
 
   // private methods
+
+  private setSelectedTimeRangeActions() {
+    for (const timeRangeActionsElement of this.timeRangeActionsTypes) {
+      if (timeRangeActionsElement.type === this.timeRange) {
+        this.selectedTimeRangeActions = timeRangeActionsElement;
+        return;
+      }
+    }
+    console.error('No TIME RANGE defined')
+  }
 
   private calculatePreviousDateByDays(days: number): Date {
     const date = this.date;

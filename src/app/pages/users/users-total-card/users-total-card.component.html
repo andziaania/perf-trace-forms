@@ -1,8 +1,11 @@
 <nb-card class="chart-card">
   <nb-card-header>
-    <span>Users in total</span>
-    <button nbButton (click)="handleShowPreviousInRange($event)" size="tiny" status="info"
-          [ngClass]="{'transparentBg': !isShowPreviousInTimeRange}">Show previous {{timeRange}}</button>
+    <div class="clearfix">
+      <span class="float-left">Users in total</span>
+      <button nbButton (click)="handleShowPreviousInRange($event)" size="tiny" status="info"
+            class="float-right"
+            [ngClass]="{'transparentBg': !isShowPreviousInTimeRange}">Show previous {{timeRange}}</button>
+    </div>
   </nb-card-header>
 
   <nb-card-body>
