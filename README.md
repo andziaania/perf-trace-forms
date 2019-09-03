@@ -44,6 +44,8 @@ Here, for the record, I put a summary of angular features and libs used in this 
 - [https://valor-software.com/ng2-charts/](https://valor-software.com/ng2-charts/)
 - canvas
 
+### Bootstrap library for styling
+
 ### Http Interceptor (MockBackendModule, ServerSimulatorInterceptor)
 - {provide: HTTP_INTERCEPTORS, useClass: ServerSimulatorInterceptor,...}
 - implements HttpInterceptor; intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>>
@@ -57,6 +59,9 @@ Here, for the record, I put a summary of angular features and libs used in this 
 ### Intercept input property changes with ngOnChanges()
 https://angular.io/guide/component-interaction#intercept-input-property-changes-with-ngonchanges
 - in users-total-card.component & users-new-vs-returning-card.component
+
+# pt- prefix
+-(tslint.json "rules", angular.json "prefix")
 
 ### MISCELLANEOUS
 - interface (users.component.TimeRange)

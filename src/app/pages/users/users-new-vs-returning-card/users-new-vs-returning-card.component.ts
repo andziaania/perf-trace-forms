@@ -4,14 +4,18 @@ import { map } from 'rxjs/operators';
 
 import { ChartUsersComponent } from '../chart-users/chart-users.component';
 import { UsersService } from './../../../data-services/users.service';
+import { TIME_RANGE } from '../time-range';
 
 
 interface TimeRangeActions {
-  type: string;
   getUsersActivityMethod$: (date: Date) => Observable<number[]>;
   getNewUsersActivityMethod$: (date: Date) => Observable<number[]>;
   getReturningUsersActivityMethod$: (date: Date) => Observable<number[]>;
 }
+
+const TOTAL_USERS_DATASET_INDEX = 0;
+const NEW_USERS_DATASET_INDEX = 1;
+const RETURNING_USERS_DATASET_INDEX = 2;
 
 @Component({
   selector: 'pt-users-new-vs-returning-card',
@@ -20,28 +24,11 @@ interface TimeRangeActions {
 })
 export class UsersNewVsReturningCardComponent implements AfterViewInit, OnChanges {
 
-  timeRangeActionsTypes: TimeRangeActions[] = [
-    {
-      type: 'Day',
-      getUsersActivityMethod$: this.users.getDailyUsersActivity,
-      getNewUsersActivityMethod$: this.users.getDailyNewUsersActivity,
-      getReturningUsersActivityMethod$: this.users.getDailyReturningUsersActivity
-    }, {
-      type: 'Week',
-      getUsersActivityMethod$: this.users.getWeeklyUsersActivity,
-      getNewUsersActivityMethod$: this.users.getWeeklyNewUsersActivity,
-      getReturningUsersActivityMethod$: this.users.getWeeklyReturningUsersActivity
-    }, {
-      type: 'Month',
-      getUsersActivityMethod$: this.users.getMonthlyUsersActivity,
-      getNewUsersActivityMethod$: this.users.getMonthlyNewUsersActivity,
-      getReturningUsersActivityMethod$: this.users.getMonthlyReturningUsersActivity
-    }
-  ];
+  timeRangeActionsTypes = new Map<TIME_RANGE, TimeRangeActions>();
 
   @Input() date: Date;
 
-  @Input() timeRange: string;
+  @Input() timeRange: TIME_RANGE;
 
   selectedTimeRangeActions: TimeRangeActions;
 
@@ -50,10 +37,32 @@ export class UsersNewVsReturningCardComponent implements AfterViewInit, OnChange
   isShowTotal = true;
 
   isShowNew = true;
-  
+
   isShowReturning = true;
 
-  constructor(private users: UsersService) { }
+  constructor(private users: UsersService) {
+    this.timeRangeActionsTypes.set(
+      TIME_RANGE.DAY, {
+        getUsersActivityMethod$: this.users.getDailyUsersActivity,
+        getNewUsersActivityMethod$: this.users.getDailyNewUsersActivity,
+        getReturningUsersActivityMethod$: this.users.getDailyReturningUsersActivity
+      }
+    );
+    this.timeRangeActionsTypes.set(
+      TIME_RANGE.WEEK, {
+        getUsersActivityMethod$: this.users.getWeeklyUsersActivity,
+        getNewUsersActivityMethod$: this.users.getWeeklyNewUsersActivity,
+        getReturningUsersActivityMethod$: this.users.getWeeklyReturningUsersActivity
+      }
+    );
+    this.timeRangeActionsTypes.set(
+      TIME_RANGE.MONTH, {
+        getUsersActivityMethod$: this.users.getMonthlyUsersActivity,
+        getNewUsersActivityMethod$: this.users.getMonthlyNewUsersActivity,
+        getReturningUsersActivityMethod$: this.users.getMonthlyReturningUsersActivity
+      }
+    );
+  }
 
 
   ngAfterViewInit() {
@@ -67,7 +76,7 @@ export class UsersNewVsReturningCardComponent implements AfterViewInit, OnChange
     // getting the value of changed properties
     for (let propName in changes) {
       if (propName === 'timeRange') {
-        this.setSelectedTimeRangeActions();
+        this.selectedTimeRangeActions = this.timeRangeActionsTypes.get(this.timeRange);
       }
       let changedProp = changes[propName];
       if (!changedProp.isFirstChange()) {
@@ -93,17 +102,21 @@ export class UsersNewVsReturningCardComponent implements AfterViewInit, OnChange
     ).subscribe((newData) => this.usersChart.setChartData(newData));
   }
 
-  // private methods
+  // event handlers
 
-  private setSelectedTimeRangeActions() {
-    for (const timeRangeActionsElement of this.timeRangeActionsTypes) {
-      if (timeRangeActionsElement.type === this.timeRange) {
-        this.selectedTimeRangeActions = timeRangeActionsElement;
-        return;
-      }
-    }
-    console.error('No TIME RANGE defined')
+  handleShowTotalUsers() {
+    this.isShowTotal = !this.isShowTotal;
+    this.usersChart.toggleChartLine(TOTAL_USERS_DATASET_INDEX);
   }
 
+  handleShowNewUsers() {
+    this.isShowNew = !this.isShowNew;
+    this.usersChart.toggleChartLine(NEW_USERS_DATASET_INDEX);
+  }
+
+  handleShowReturningUsers() {
+    this.isShowReturning = !this.isShowReturning;
+    this.usersChart.toggleChartLine(RETURNING_USERS_DATASET_INDEX);
+  }
 
 }

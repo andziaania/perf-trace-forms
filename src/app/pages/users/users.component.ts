@@ -6,6 +6,8 @@ import { Observable, zip } from 'rxjs';
 import { ChartUsersComponent } from './chart-users/chart-users.component';
 import { map } from 'rxjs/operators';
 
+import { TIME_RANGE } from './time-range';
+
 
 @Component({
   selector: 'pt-users',
@@ -14,9 +16,9 @@ import { map } from 'rxjs/operators';
 })
 export class UsersComponent implements AfterViewInit {
 
-  timeRanges = ['Day', 'Week', 'Month'];
+  timeRanges = [TIME_RANGE.DAY, TIME_RANGE.WEEK, TIME_RANGE.MONTH];
 
-  selectedTimeRange = this.timeRanges[0];
+  selectedTimeRange = TIME_RANGE.DAY;
 
   selectedDate = new Date();
 
@@ -46,8 +48,8 @@ export class UsersComponent implements AfterViewInit {
 
 
   // events
-  handleSelectedTimeRangeChange(timeRange: string) {
-    this.selectedTimeRange = timeRange;
+  // handleSelectedTimeRangeChange(timeRange: string) {
+  //   this.selectedTimeRange = timeRange;
     //event emitter
 
 
@@ -58,7 +60,7 @@ export class UsersComponent implements AfterViewInit {
     //   }
     // }
     // this.refreshTotalData();
-  }
+  // }
 
   handleDateChange(newDate: Date) {
     //event emitter

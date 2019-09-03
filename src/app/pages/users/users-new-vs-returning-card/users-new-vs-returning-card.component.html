@@ -2,23 +2,18 @@
   <nb-card-header>
     <div class="clearfix">
 
-
-        <!-- <button nbButton (click)="handleShowNewUsers($event)" size="tiny" status="info"
-              [ngClass]="{'transparentBg': !isShowNewUsers}">Show new users</button>
-        <button nbButton (click)="handleShowReturningUsers($event)" size="tiny" status="info"
-              [ngClass]="{'transparentBg': !isShowReturningUsers}">Show returning users</button>
-        <button nbButton (click)="handleShowTotalUsers($event)" size="tiny" status="info"
-              [ngClass]="{'transparentBg': !isShowTotalUsers}">Show total</button> -->
-
       <span class="float-left">New / Returning users</span>
       <button nbButton size="tiny" status="info"
             class="float-right ml-1"
-            [ngClass]="{'transparentBg': !isShowNewUsers}">Show new users</button>
-      <button nbButton size="tiny" status="info"
-            class="float-right ml-1"
+            (click)="handleShowReturningUsers()"
             [ngClass]="{'transparentBg': !isShowReturningUsers}">Show returning users</button>
       <button nbButton size="tiny" status="info"
             class="float-right ml-1"
+            (click)="handleShowNewUsers()"
+            [ngClass]="{'transparentBg': !isShowNewUsers}">Show new users</button>
+      <button nbButton size="tiny" status="info"
+            class="float-right ml-1"
+            (click)="handleShowTotalUsers()"
             [ngClass]="{'transparentBg': !isShowTotalUsers}">Show total</button>
     </div>
   </nb-card-header>

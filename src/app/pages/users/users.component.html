@@ -1,6 +1,6 @@
   <nb-card class="chart-card">
     <nb-card-body>
-      <nb-select [selected]="selectedTimeRange" (selectedChange)="handleSelectedTimeRangeChange($event)" size="tiny">
+      <nb-select [(selected)]="selectedTimeRange" size="tiny" class="mr-1">
         <nb-option *ngFor="let timeRange of timeRanges" [value]="timeRange">{{ timeRange }}</nb-option>
       </nb-select>
       <input nbInput [nbDatepicker]="datepicker" value="by {{selectedDate | date:'mediumDate'}}" fieldSize="tiny">
@@ -12,25 +12,6 @@
 
   <pt-users-new-vs-returning-card [date]="selectedDate" [timeRange]="selectedTimeRange"> </pt-users-new-vs-returning-card>
 
-
-
-  <!-- <nb-card class="chart-card">
-    <nb-card-header>
-      <span>New / Returning users</span>
-      <button nbButton (click)="handleShowNewUsers($event)" size="tiny" status="info"
-            [ngClass]="{'transparentBg': !isShowNewUsers}">Show new users</button>
-      <button nbButton (click)="handleShowReturningUsers($event)" size="tiny" status="info"
-            [ngClass]="{'transparentBg': !isShowReturningUsers}">Show returning users</button>
-      <button nbButton (click)="handleShowTotalUsers($event)" size="tiny" status="info"
-            [ngClass]="{'transparentBg': !isShowTotalUsers}">Show total</button>
-
-    </nb-card-header>
-
-    <nb-card-body>
-      <pt-chart-users></pt-chart-users>
-    </nb-card-body>
-
-  </nb-card> -->
 
   <!-- <div class="flex-item">
     <table class="table table-responsive table-condensed">

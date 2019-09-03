@@ -4,15 +4,15 @@ import { map } from 'rxjs/operators';
 
 import { ChartUsersComponent } from '../chart-users/chart-users.component';
 import { UsersService } from './../../../data-services/users.service';
+import { TIME_RANGE } from '../time-range';
 
 
 interface TimeRangeActions {
-  type: string;
   getUsersActivityMethod$: (date: Date) => Observable<number[]>;
   getPreviousMoment(): Date;
 }
 
-const SECOND_DATASET_INDEX = 1;
+const PREVIOUS_DATASET_INDEX = 1;
 
 
 @Component({
@@ -22,29 +22,11 @@ const SECOND_DATASET_INDEX = 1;
 })
 export class UsersTotalComponent implements AfterViewInit, OnChanges {
 
-  timeRangeActionsTypes: TimeRangeActions[] = [
-    {
-      type: 'Day',
-      getUsersActivityMethod$: this.users.getDailyUsersActivity,
-      getPreviousMoment: () => this.calculatePreviousDateByDays(1),
-    }, {
-      type: 'Week',
-      getUsersActivityMethod$: this.users.getWeeklyUsersActivity,
-      getPreviousMoment: () => this.calculatePreviousDateByDays(7),
-    }, {
-      type: 'Month',
-      getUsersActivityMethod$: this.users.getMonthlyUsersActivity,
-      getPreviousMoment: () => {
-        const date = this.date;
-        date.setMonth(date.getMonth() - 1);
-        return date;
-      }
-    }
-  ];
+  timeRangeActionsTypes = new Map<TIME_RANGE, TimeRangeActions>();
 
   @Input() date: Date;
 
-  @Input() timeRange: string;
+  @Input() timeRange: TIME_RANGE;
 
   selectedTimeRangeActions: TimeRangeActions;
 
@@ -52,7 +34,30 @@ export class UsersTotalComponent implements AfterViewInit, OnChanges {
 
   isShowPreviousInTimeRange = true;
 
-  constructor(private users: UsersService) { }
+  constructor(private users: UsersService) {
+    this.timeRangeActionsTypes.set(
+      TIME_RANGE.DAY, {
+        getUsersActivityMethod$: this.users.getDailyUsersActivity,
+        getPreviousMoment: () => this.calculatePreviousDateByDays(1),
+      }
+    );
+    this.timeRangeActionsTypes.set(
+      TIME_RANGE.WEEK, {
+        getUsersActivityMethod$: this.users.getWeeklyUsersActivity,
+        getPreviousMoment: () => this.calculatePreviousDateByDays(7),
+      }
+    );
+    this.timeRangeActionsTypes.set(
+      TIME_RANGE.MONTH, {
+        getUsersActivityMethod$: this.users.getMonthlyUsersActivity,
+        getPreviousMoment: () => {
+          const date = this.date;
+          date.setMonth(date.getMonth() - 1);
+          return date;
+        }
+      }
+    );
+  }
 
 
   ngAfterViewInit() {
@@ -66,7 +71,7 @@ export class UsersTotalComponent implements AfterViewInit, OnChanges {
     // getting the value of changed properties
     for (let propName in changes) {
       if (propName === 'timeRange') {
-        this.setSelectedTimeRangeActions();
+        this.selectedTimeRangeActions = this.timeRangeActionsTypes.get(this.timeRange);
       }
       let changedProp = changes[propName];
       if (!changedProp.isFirstChange()) {
@@ -93,23 +98,13 @@ export class UsersTotalComponent implements AfterViewInit, OnChanges {
 
   // event handlers
 
-  handleShowPreviousInRange(isShow: boolean) {
+  handleShowPreviousInRange() {
     this.isShowPreviousInTimeRange = !this.isShowPreviousInTimeRange;
-    this.usersChart.toggleChartLine(SECOND_DATASET_INDEX);
+    this.usersChart.toggleChartLine(PREVIOUS_DATASET_INDEX);
   }
 
 
   // private methods
-
-  private setSelectedTimeRangeActions() {
-    for (const timeRangeActionsElement of this.timeRangeActionsTypes) {
-      if (timeRangeActionsElement.type === this.timeRange) {
-        this.selectedTimeRangeActions = timeRangeActionsElement;
-        return;
-      }
-    }
-    console.error('No TIME RANGE defined')
-  }
 
   private calculatePreviousDateByDays(days: number): Date {
     const date = this.date;
