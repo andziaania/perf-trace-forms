@@ -1,6 +1,5 @@
-
   <nb-card class="chart-card">
-      <nb-card-body>
+    <nb-card-body>
       <nb-select [selected]="selectedTimeRange" (selectedChange)="handleSelectedTimeRangeChange($event)" size="tiny">
         <nb-option *ngFor="let timeRange of timeRanges" [value]="timeRange">{{ timeRange }}</nb-option>
       </nb-select>
@@ -10,6 +9,9 @@
   </nb-card>
 
   <pt-users-total-card [date]="selectedDate" [timeRange]="selectedTimeRange"></pt-users-total-card>
+
+  <pt-users-new-vs-returning-card [date]="selectedDate" [timeRange]="selectedTimeRange"> </pt-users-new-vs-returning-card>
+
 
 
   <!-- <nb-card class="chart-card">
@@ -30,26 +32,6 @@
 
   </nb-card> -->
 
-
-    <div class="row">
-      <div class="col-md-6">tyetete
-        <!-- <ngx-profit-card></ngx-profit-card> -->
-      </div>
-      <div class="col-md-6">teetewtdf
-        <!-- <ngx-earning-card></ngx-earning-card> -->
-      </div>
-    </div>
-
-
-
-
-
-<div class="flex">
-  <div class="flex-item">
-
-
-
-  </div>
   <!-- <div class="flex-item">
     <table class="table table-responsive table-condensed">
       <tr>

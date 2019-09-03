@@ -2,7 +2,6 @@ import { Component, ViewChild, Input } from '@angular/core';
 import { Color, BaseChartDirective, Label } from 'ng2-charts';
 import { ChartDataSets, ChartOptions } from 'chart.js';
 
-const SECOND_DATASET_INDEX = 1;
 
 @Component({
   selector: 'pt-chart-users',
@@ -37,16 +36,21 @@ export class ChartUsersComponent {
     },
   ];
 
-  lineChartLegend = true;
+  lineChartLegend = {
+    labels: {
+      fontFamily: '"Lato", sans-serif',
+      fontSize: 12,
+    }
+  };
 
   lineChartType = 'line';
 
   lineChartLabels: Label[] = this.generateLabels(24);
 
-  lineChartData: ChartDataSets[] = [
-    { data: [], label: 'Today' },
-    { data: [], label: 'Prev' },
-  ];
+    lineChartData: ChartDataSets[] = [
+      { data: [], label: 'Today' },
+      { data: [], label: 'Prev' },
+    ];
 
   constructor() {
   }
@@ -58,9 +62,9 @@ export class ChartUsersComponent {
     this.chart.update();
   }
 
-  public togglePrevTimeRange() {
-    const isHidden = this.chart.isDatasetHidden(SECOND_DATASET_INDEX);
-    this.chart.hideDataset(SECOND_DATASET_INDEX, !isHidden);
+  public toggleChartLine(datasetIndex: number) {
+    const isHidden = this.chart.isDatasetHidden(datasetIndex);
+    this.chart.hideDataset(datasetIndex, !isHidden);
   }
 
 

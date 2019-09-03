@@ -1,4 +1,4 @@
-import { Component, AfterViewInit, ViewChild, Input, OnChanges, SimpleChange, OnInit } from '@angular/core';
+import { Component, AfterViewInit, ViewChild, Input, OnChanges, SimpleChange } from '@angular/core';
 import { Observable, zip } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -12,13 +12,15 @@ interface TimeRangeActions {
   getPreviousMoment(): Date;
 }
 
+const SECOND_DATASET_INDEX = 1;
+
 
 @Component({
   selector: 'pt-users-total-card',
   templateUrl: './users-total-card.component.html',
   styleUrls: ['./users-total-card.component.scss']
 })
-export class UsersTotalComponent implements AfterViewInit, OnChanges, OnInit  {
+export class UsersTotalComponent implements AfterViewInit, OnChanges {
 
   timeRangeActionsTypes: TimeRangeActions[] = [
     {
@@ -50,11 +52,8 @@ export class UsersTotalComponent implements AfterViewInit, OnChanges, OnInit  {
 
   isShowPreviousInTimeRange = true;
 
-  // selectedTimeRange = this.timeRanges[0];
-
   constructor(private users: UsersService) { }
 
-  ngOnInit() { }
 
   ngAfterViewInit() {
     this.refreshTotalData();
@@ -96,7 +95,7 @@ export class UsersTotalComponent implements AfterViewInit, OnChanges, OnInit  {
 
   handleShowPreviousInRange(isShow: boolean) {
     this.isShowPreviousInTimeRange = !this.isShowPreviousInTimeRange;
-    this.usersChart.togglePrevTimeRange();
+    this.usersChart.toggleChartLine(SECOND_DATASET_INDEX);
   }
 
 

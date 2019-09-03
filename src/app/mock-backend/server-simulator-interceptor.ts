@@ -9,9 +9,15 @@ import { materialize, delay, dematerialize, mergeMap } from 'rxjs/operators';
 const GET_METHOD = 'GET';
 
 const PATTERNS = {
-  USERS_DAILY: /\/users\/day\/\d+$/,
-  USERS_WEEKLY: /\/users\/week\/\d+$/,
-  USERS_MONTHLY: /\/users\/month\/\d+$/
+  USERS_TOTAL_DAILY: /\/users\/total\/day\/\d+$/,
+  USERS_TOTAL_WEEKLY: /\/users\/total\/week\/\d+$/,
+  USERS_TOTAL_MONTHLY: /\/users\/total\/month\/\d+$/,
+  USERS_NEW_DAILY: /\/users\/new\/day\/\d+$/,
+  USERS_NEW_WEEKLY: /\/users\/new\/week\/\d+$/,
+  USERS_NEW_MONTHLY: /\/users\/new\/month\/\d+$/,
+  USERS_RETURNING_DAILY: /\/users\/returning\/day\/\d+$/,
+  USERS_RETURNING_WEEKLY: /\/users\/returning\/week\/\d+$/,
+  USERS_RETURNING_MONTHLY: /\/users\/returning\/month\/\d+$/
 };
 
 /**
@@ -42,11 +48,23 @@ export class ServerSimulatorInterceptor implements HttpInterceptor {
     const { url, method, headers, body } = request;
 
     switch (true) {
-      case url.match(PATTERNS.USERS_DAILY) && method === GET_METHOD:
+      case url.match(PATTERNS.USERS_TOTAL_DAILY) && method === GET_METHOD:
         return ok(this.usersService.genDailyUsersActivity());
-      case url.match(PATTERNS.USERS_WEEKLY) && method === GET_METHOD:
+      case url.match(PATTERNS.USERS_TOTAL_WEEKLY) && method === GET_METHOD:
         return ok(this.usersService.genWeeklyUsersActivity());
-      case url.match(PATTERNS.USERS_MONTHLY) && method === GET_METHOD:
+      case url.match(PATTERNS.USERS_TOTAL_MONTHLY) && method === GET_METHOD:
+        return ok(this.usersService.genMonthlyUsersActivity());
+      case url.match(PATTERNS.USERS_NEW_DAILY) && method === GET_METHOD:
+        return ok(this.usersService.genDailyUsersActivity());
+      case url.match(PATTERNS.USERS_NEW_WEEKLY) && method === GET_METHOD:
+        return ok(this.usersService.genWeeklyUsersActivity());
+      case url.match(PATTERNS.USERS_NEW_MONTHLY) && method === GET_METHOD:
+        return ok(this.usersService.genMonthlyUsersActivity());
+      case url.match(PATTERNS.USERS_RETURNING_DAILY) && method === GET_METHOD:
+        return ok(this.usersService.genDailyUsersActivity());
+      case url.match(PATTERNS.USERS_RETURNING_WEEKLY) && method === GET_METHOD:
+        return ok(this.usersService.genWeeklyUsersActivity());
+      case url.match(PATTERNS.USERS_RETURNING_MONTHLY) && method === GET_METHOD:
         return ok(this.usersService.genMonthlyUsersActivity());
       default:
         console.log(`passes throuhg this request: ${request.url}`);
