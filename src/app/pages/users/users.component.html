@@ -4,7 +4,8 @@
         <nb-option *ngFor="let timeRange of timeRanges" [value]="timeRange">{{ timeRange }}</nb-option>
       </nb-select>
       <input nbInput [nbDatepicker]="datepicker" value="by {{selectedDate | date:'mediumDate'}}" fieldSize="tiny">
-      <nb-datepicker #datepicker [date]="selectedDate" (dateChange)="handleDateChange($event)"></nb-datepicker>
+      <nb-datepicker #datepicker [(date)]="selectedDate"></nb-datepicker>
+
     </nb-card-body>
   </nb-card>
 
