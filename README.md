@@ -1,33 +1,10 @@
 
 # PerfTrace
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.2.1 and upgraded to version 8.2.0.
-
-## Development server
-
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
-
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build. Copy the output from the dist folder under a web-server of your choice.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
-
-
+You can see the live demo of this project on 
+- http://pawelczyk.biz.pl
+or
+- https://andziaania.github.io
 
 ## TECHNICAL RECORD:
 
@@ -60,10 +37,28 @@ Here, for the record, I put a summary of angular features and libs used in this 
 https://angular.io/guide/component-interaction#intercept-input-property-changes-with-ngonchanges
 - in users-total-card.component & users-new-vs-returning-card.component
 
-# pt- prefix
--(tslint.json "rules", angular.json "prefix")
+### pt- prefix
+- (tslint.json "rules", angular.json "prefix")
+
+### reverse proxy
+- webpack dev server custom configuration for the perf trace server
+- nginx custom configuration of 
+* the everse-proxy for the perf trace server 
+* the error page
 
 ### MISCELLANEOUS
 - interface (users.component.TimeRange)
 - DatePipe
 - zip (rxjs)
+- https://www.npmjs.com/package/file-saver
+- This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.2.1 and upgraded to version 8.2.0.
+
+
+### OTHERS
+- docker configuration (Dockerfile)
+
+
+## TODO
+- consider timezones in server and client. 
+See for Java https://stackoverflow.com/questions/51952984/how-can-i-convert-a-time-in-milliseconds-to-zoneddatetime/51953287
+and  https://stackoverflow.com/questions/32437550/whats-the-difference-between-instant-and-localdatetime/32443004#32443004
