@@ -57,7 +57,7 @@ export class ChartUsersComponent {
 
   public setChartData(chartData: ChartDataSets[]) {
     this.lineChartData = chartData;
-    this.lineChartLabels = this.generateLabels(chartData[0].data.length);
+    this.lineChartLabels = this.generateLabels(Math.max(chartData[0].data.length, chartData[1].data.length));
 
     this.chart.update();
   }
