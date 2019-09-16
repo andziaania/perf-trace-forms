@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 
-const URL = 'api/perf-trace/users';
+const URL = 'api/users';
 const UTYPE_TOTAL = 'total';
 const UTYPE_NEW = 'new';
 const UTYPE_RETURNING = 'returning';

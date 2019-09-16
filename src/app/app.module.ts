@@ -9,7 +9,7 @@ import { NbDummyAuthStrategy, NbAuthModule } from '@nebular/auth';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { MockBackendModule } from './mock-backend/mock-backend.module';
+// import { MockBackendModule } from './mock-backend/mock-backend.module';
 
 
 @NgModule({
@@ -39,7 +39,7 @@ import { MockBackendModule } from './mock-backend/mock-backend.module';
 
     // Provides an interceptor that mocks the results for the HTTP requests.
     // Remove if there is a server side for this app implemented.
-    MockBackendModule.forRoot()
+    // MockBackendModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]
