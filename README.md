@@ -43,8 +43,8 @@ https://angular.io/guide/component-interaction#intercept-input-property-changes-
 ### reverse proxy
 - webpack dev server custom configuration for the perf trace server
 - nginx custom configuration of 
-* the everse-proxy for the perf trace server 
-* the error page
+  - the reverse-proxy for the perf trace server 
+  - the error page redirection
 
 ### MISCELLANEOUS
 - interface (users.component.TimeRange)
