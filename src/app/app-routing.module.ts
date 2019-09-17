@@ -18,11 +18,12 @@ const routes: Routes = [
     ],
   },
 
+  { path: 'about', component: AboutComponent },
   { path: 'pages', loadChildren: () => import('./pages/pages.module').then(m => m.PagesModule) },
   { path: 'perf-trace', redirectTo: 'pages', pathMatch: 'full' },
 
-  { path: '', redirectTo: 'pages', pathMatch: 'full' },
-  { path: '**',  redirectTo: 'pages', pathMatch: 'full' }
+  { path: '', redirectTo: 'about', pathMatch: 'full' },
+  { path: '**',  redirectTo: 'about', pathMatch: 'full' }
 ];
 
 @NgModule({
