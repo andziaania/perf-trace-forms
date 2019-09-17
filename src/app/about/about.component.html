@@ -1,8 +1,7 @@
 WELCOME TO PERF-TRACE!
 
 <ul>
-    <li>To go to the perf-trace client app click <a href="/perf-trace" target="_blank">HERE on pawelczyk.biz.pl/perf-trace</a>
-        or <a href="https://andziaania.github.io/perf-trace" target="_blank">HERE on https://andziaania.github.io/perf-trace</a></li>
+    <li>To go to the perf-trace client app click <a href="/perf-trace" target="_blank">HERE on pawelczyk.biz.pl/perf-trace</a></li>
     <li>The perf-trace-server app is avaible on pawelczyk.biz.pl:8081</li>
     <li>To see some sample app that sends its data to the perf-trace-server click <a href="" target="_blank">HERE</a></li>
     <li>Github sources of the perf-trace client (Angular) are <a href="https://github.com/andziaania/perf-trace" target="_blank">HERE</a></li>
@@ -19,17 +18,17 @@ WELCOME TO PERF-TRACE!
               window.ptParams = {{ '{' }}webappId: '1'{{ '}' }};
 
               // Sourcing the perf-trace script
-              let scriptStr = 'script';
-              let server = (document.location.protocol === 'https:'
+              const scriptStr = 'script';
+              const server = (document.location.protocol === 'https:'
                   ? 'https://github.com/andziaania/perf-trace-server/raw/master/src/main/resources/static/'
                   : 'http://pawelczyk.biz.pl:8081/');
 
-              let pt = document.createElement(scriptStr);
+              const pt = document.createElement(scriptStr);
               pt.type = 'text/javascript';
               pt.async = true;
               pt.src = server + 'perftrace.js';
 
-              let firstScriptOnPage = document.getElementsByTagName('script')[0];
+              const firstScriptOnPage = document.getElementsByTagName('script')[0];
               firstScriptOnPage.parentNode.insertBefore(pt, firstScriptOnPage);
 
               {{ '}' }})(window);
