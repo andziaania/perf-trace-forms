@@ -1,3 +1,4 @@
+import { AboutComponent } from './about/about.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { NbAuthComponent, NbLoginComponent, NbRegisterComponent, NbLogoutComponent,
@@ -16,11 +17,12 @@ const routes: Routes = [
       { path: 'reset-password', component: NbResetPasswordComponent },
     ],
   },
-  {
-    path: 'pages',
-    loadChildren: () => import('./pages/pages.module').then(m => m.PagesModule)
-  },
-  { path: '', redirectTo: 'pages', pathMatch: 'full' }
+
+  { path: 'pages', loadChildren: () => import('./pages/pages.module').then(m => m.PagesModule) },
+  { path: 'perf-trace', redirectTo: 'pages', pathMatch: 'full' },
+
+  { path: '', redirectTo: 'pages', pathMatch: 'full' },
+  { path: '**',  redirectTo: 'pages', pathMatch: 'full' }
 ];
 
 @NgModule({
