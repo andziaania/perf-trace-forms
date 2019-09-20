@@ -8,6 +8,7 @@ import { TIME_RANGE } from '../time-range';
 
 
 interface TimeRangeActions {
+  xAxesLabel: string;
   getUsersActivityMethod$: (date: Date) => Observable<number[]>;
   getPreviousMoment(): Date;
 }
@@ -39,12 +40,14 @@ export class UsersTotalComponent implements AfterViewInit, OnChanges {
       TIME_RANGE.DAY, {
         getUsersActivityMethod$: this.users.getDailyUsersActivity,
         getPreviousMoment: () => this.calculatePreviousDateByDays(1),
+        xAxesLabel: 'Hour'
       }
     );
     this.timeRangeActionsTypes.set(
       TIME_RANGE.WEEK, {
         getUsersActivityMethod$: this.users.getWeeklyUsersActivity,
         getPreviousMoment: () => this.calculatePreviousDateByDays(7),
+        xAxesLabel: 'Day in Week'
       }
     );
     this.timeRangeActionsTypes.set(
@@ -54,7 +57,8 @@ export class UsersTotalComponent implements AfterViewInit, OnChanges {
           const date = this.date;
           date.setMonth(date.getMonth() - 1);
           return date;
-        }
+        },
+        xAxesLabel: 'Day in Month'
       }
     );
   }
@@ -92,7 +96,7 @@ export class UsersTotalComponent implements AfterViewInit, OnChanges {
         { data: datasetCurr, label: `By ${this.date.toDateString()}`},
         { data: datasetPrev, label: `Previous ${this.timeRange}`}
       ])
-    ).subscribe((newData) => this.usersChart.setChartData(newData));
+    ).subscribe((newData) => this.usersChart.setChartData(newData, this.selectedTimeRangeActions.xAxesLabel));
   }
 
 

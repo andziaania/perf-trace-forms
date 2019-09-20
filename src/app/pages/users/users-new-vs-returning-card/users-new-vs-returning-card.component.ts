@@ -8,6 +8,7 @@ import { TIME_RANGE } from '../time-range';
 
 
 interface TimeRangeActions {
+  xAxesLabel: string;
   getUsersActivityMethod$: (date: Date) => Observable<number[]>;
   getNewUsersActivityMethod$: (date: Date) => Observable<number[]>;
   getReturningUsersActivityMethod$: (date: Date) => Observable<number[]>;
@@ -45,21 +46,24 @@ export class UsersNewVsReturningCardComponent implements AfterViewInit, OnChange
       TIME_RANGE.DAY, {
         getUsersActivityMethod$: this.users.getDailyUsersActivity,
         getNewUsersActivityMethod$: this.users.getDailyNewUsersActivity,
-        getReturningUsersActivityMethod$: this.users.getDailyReturningUsersActivity
+        getReturningUsersActivityMethod$: this.users.getDailyReturningUsersActivity,
+        xAxesLabel: 'Hour'
       }
     );
     this.timeRangeActionsTypes.set(
       TIME_RANGE.WEEK, {
         getUsersActivityMethod$: this.users.getWeeklyUsersActivity,
         getNewUsersActivityMethod$: this.users.getWeeklyNewUsersActivity,
-        getReturningUsersActivityMethod$: this.users.getWeeklyReturningUsersActivity
+        getReturningUsersActivityMethod$: this.users.getWeeklyReturningUsersActivity,
+        xAxesLabel: 'Day in Week'
       }
     );
     this.timeRangeActionsTypes.set(
       TIME_RANGE.MONTH, {
         getUsersActivityMethod$: this.users.getMonthlyUsersActivity,
         getNewUsersActivityMethod$: this.users.getMonthlyNewUsersActivity,
-        getReturningUsersActivityMethod$: this.users.getMonthlyReturningUsersActivity
+        getReturningUsersActivityMethod$: this.users.getMonthlyReturningUsersActivity,
+        xAxesLabel: 'Day in Month'
       }
     );
   }
@@ -99,7 +103,7 @@ export class UsersNewVsReturningCardComponent implements AfterViewInit, OnChange
         { data: datasetNew, label: `New`},
         { data: datasetReturning, label: `Returning`}
       ])
-    ).subscribe((newData) => this.usersChart.setChartData(newData));
+    ).subscribe((newData) => this.usersChart.setChartData(newData, this.selectedTimeRangeActions.xAxesLabel));
   }
 
   // event handlers

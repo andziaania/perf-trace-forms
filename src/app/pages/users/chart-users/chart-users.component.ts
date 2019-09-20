@@ -15,6 +15,23 @@ export class ChartUsersComponent {
   lineChartOptions: (ChartOptions) = {
     responsive: true,
     maintainAspectRatio: false,
+    scales:  {
+      xAxes: [{
+          scaleLabel: {
+              display:     true,
+              labelString: 'Date'
+          }
+      }],
+      yAxes: [{
+        ticks: {
+          callback: value => (value % 1 === 0) ? value : undefined ,  // digital scale
+        },
+        scaleLabel: {
+            display:     true,
+            labelString: 'Numbe of Users'
+        }
+      }]
+    }
   };
 
   lineChartColors: Color[] = [
@@ -55,9 +72,10 @@ export class ChartUsersComponent {
   constructor() {
   }
 
-  public setChartData(chartData: ChartDataSets[]) {
+  public setChartData(chartData: ChartDataSets[], newXLabel: string) {
     this.lineChartData = chartData;
     this.lineChartLabels = this.generateLabels(Math.max(chartData[0].data.length, chartData[1].data.length));
+    this.changeXAxesLabel(newXLabel);
 
     this.chart.update();
   }
@@ -79,5 +97,29 @@ export class ChartUsersComponent {
 
   private generateLabels(dataSize: number) {
     return new Array(dataSize).fill('').map((item, index) => (index + 1).toString());
+  }
+
+  private changeXAxesLabel(newXLabel: string) {
+    this.lineChartOptions = {
+      responsive: true,
+      maintainAspectRatio: false,
+      scales:  {
+        xAxes: [{
+            scaleLabel: {
+                display:     true,
+                labelString: newXLabel
+            }
+        }],
+        yAxes: [{
+          ticks: {
+            callback: value => (value % 1 === 0) ? value : undefined ,  // digital scale
+          },
+          scaleLabel: {
+              display:     true,
+              labelString: 'Numbe of Users'
+          }
+        }]
+      }
+    };
   }
 }
