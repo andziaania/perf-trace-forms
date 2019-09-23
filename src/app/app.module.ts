@@ -9,14 +9,12 @@ import { NbDummyAuthStrategy, NbAuthModule } from '@nebular/auth';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { AboutComponent } from './about/about.component';
 // import { MockBackendModule } from './mock-backend/mock-backend.module';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    AboutComponent,
   ],
   imports: [
     BrowserModule,

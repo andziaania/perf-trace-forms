@@ -1,12 +1,17 @@
-<nb-layout>
-    <nb-layout-header fixed>
-      <span class="title">Perf Trace</span>
-    </nb-layout-header>
-    <nb-sidebar>
-        <nb-menu [items]="menu"></nb-menu>
-    </nb-sidebar>
-    <nb-layout-column>
-      <router-outlet></router-outlet>
-    </nb-layout-column>
-    <nb-layout-footer fixed> @Annagram https://github.com/andziaania</nb-layout-footer>
+<nb-layout windowMode>
+  <nb-layout-header fixed>
+    <a (click)="toggleSidebar()" href="#" class="sidebar-toggle">
+      <nb-icon icon="menu-2-outline"></nb-icon>
+    </a>
+    <span class="title">Perf Trace</span>
+
+  </nb-layout-header>
+  <nb-sidebar tag="menu-sidebar" class="menu-sidebar" responsive state="expanded">
+    <nb-menu [items]="menu"></nb-menu>
+  </nb-sidebar>
+  <nb-layout-column>
+    <router-outlet></router-outlet>
+  </nb-layout-column>
+  <nb-layout-footer fixed> <a class="small-text" href="https://github.com/andziaania">@Ania Pawelczyk
+      https://github.com/andziaania </a> </nb-layout-footer>
 </nb-layout>

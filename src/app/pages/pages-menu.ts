@@ -2,15 +2,20 @@ import { NbMenuItem } from '@nebular/theme';
 
 export const APP_MENU: NbMenuItem[] = [
   {
+    title: 'ABOUT',
+    link: '/pages/about',
+    icon: 'home-outline'
+  },
+  {
     title: 'Users',
     icon: 'people-outline',
-    link: '/pages/users-stats',
+    link: '/pages/users',
     home: true,
     expanded: true,
     children: [
       {
         title: 'Statistics',
-        link: '/users-stats',
+        link: '/pages/users',
       },
       {
         title: 'Currently',
