@@ -18,10 +18,6 @@ export class UsersService {
 
   constructor(private http: HttpClient) { }
 
-  // getActiveUsersCount(): Observable<number> {
-  //   return of(324);
-  // }
-
   getDailyUsersActivity(date: Date): Observable<number[]> {
     const reqUrl = `${URL}/${UTYPE_TOTAL}/${RANGE_DAY}?date=${date.toISOString()}`;
     return this.http.get<number[]>(reqUrl);

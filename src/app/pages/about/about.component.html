@@ -13,12 +13,37 @@
     <div class="col-sm">
       <nb-card>
         <nb-card-body>
+            <div class="info">Perf Trace is an application that:</div>
+          <nb-list>
+            <nb-list-item>
+                <nb-icon icon="person-outline" [options]="{ animation: { type: 'pulse' } }"></nb-icon><span> tracks user's activity on this page (Javascript) </span>
+            </nb-list-item>
+            <nb-list-item>
+                <nb-icon icon="cloud-download-outline" [options]="{ animation: { type: 'pulse' } }"></nb-icon><span> sends them to the server (REST, Java) </span>
+            </nb-list-item>
+            <nb-list-item>
+                <nb-icon icon="save-outline" [options]="{ animation: { type: 'pulse' } }"></nb-icon><span> the server every minute collects data and groups statistics (Spring scheduling) </span>
+            </nb-list-item>
+            <nb-list-item>
+                <nb-icon icon="activity-outline" [options]="{ animation: { type: 'pulse' } }"></nb-icon><span> and provides those statistics through the REST api. This you can see through this app (Angular) </span>
+            </nb-list-item>
+          </nb-list>
+          <div class="info">Therefore you can trace your activity and see it here at once!</div>
+        </nb-card-body>
+      </nb-card>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm">
+      <nb-card>
+        <nb-card-body>
           To go to the perf-trace client app click <a href="/pages/perf-trace">HERE on
             pawelczyk.biz.pl/perf-trace</a>
         </nb-card-body>
         <nb-card-footer>
           <div class="text-center">
-            <nb-icon icon="activity-outline" [options]="{ animation: { type: 'pulse' } }"></nb-icon>
+            <a href="/pages/perf-trace"><nb-icon icon="activity-outline" [options]="{ animation: { type: 'pulse' } }"></nb-icon></a>
           </div>
         </nb-card-footer>
       </nb-card>
@@ -42,7 +67,7 @@
         </nb-card-body>
         <nb-card-footer>
           <div class="text-center">
-            <nb-icon icon="github-outline" [options]="{ animation: { type: 'pulse' } }"></nb-icon>
+            <a href="https://github.com/andziaania/perf-trace"><nb-icon icon="github-outline" [options]="{ animation: { type: 'pulse' } }"></nb-icon></a>
           </div>
         </nb-card-footer>
       </nb-card>
@@ -55,7 +80,7 @@
         </nb-card-body>
         <nb-card-footer>
           <div class="text-center">
-            <nb-icon icon="github-outline" [options]="{ animation: { type: 'pulse' } }"></nb-icon>
+            <a href="https://github.com/andziaania/perf-trace-server"><nb-icon icon="github-outline" [options]="{ animation: { type: 'pulse' } }"></nb-icon></a>
           </div>
         </nb-card-footer>
       </nb-card>

@@ -5,7 +5,7 @@ import { PagesRoutingModule } from './pages-routing.module';
 import { UsersComponent } from './users/users.component';
 import { PagesComponent } from './pages.component';
 import { NbLayoutModule, NbMenuModule, NbSidebarModule, NbSelectModule, NbDatepickerModule, NbButtonModule,
-        NbInputModule, NbToggleModule, NbCardModule, NbCheckboxModule, NbIconModule } from '@nebular/theme';
+        NbInputModule, NbToggleModule, NbCardModule, NbCheckboxModule, NbIconModule, NbStepperModule, NbListModule } from '@nebular/theme';
 
 import { ChartsModule } from 'ng2-charts';
 import { ChartUsersComponent } from './users/chart-users/chart-users.component';
@@ -38,6 +38,7 @@ import { AboutComponent } from './about/about.component';
     NbCardModule,
     NbCheckboxModule,
     NbIconModule,
+    NbListModule,
   ]
 })
 export class PagesModule { }
