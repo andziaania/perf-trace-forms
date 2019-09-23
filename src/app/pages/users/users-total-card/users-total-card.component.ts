@@ -53,11 +53,7 @@ export class UsersTotalComponent implements AfterViewInit, OnChanges {
     this.timeRangeActionsTypes.set(
       TIME_RANGE.MONTH, {
         getUsersActivityMethod$: this.users.getMonthlyUsersActivity,
-        getPreviousMoment: () => {
-          const date = this.date;
-          date.setMonth(date.getMonth() - 1);
-          return date;
-        },
+        getPreviousMoment: () => this.calculatePreviousMonth(),
         xAxesLabel: 'Day in Month'
       }
     );
@@ -113,6 +109,12 @@ export class UsersTotalComponent implements AfterViewInit, OnChanges {
   private calculatePreviousDateByDays(days: number): Date {
     const date = new Date();
     date.setDate(this.date.getDate() - days);
+    return date;
+  }
+
+  private calculatePreviousMonth(): Date {
+    const date = new Date();
+    date.setMonth(this.date.getMonth() - 1);
     return date;
   }
 

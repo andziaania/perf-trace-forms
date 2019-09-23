@@ -10,7 +10,6 @@ import { TIME_RANGE } from '../time-range';
 interface TimeRangeActions {
   xAxesLabel: string;
   getUsersActivityMethod$: (date: Date) => Observable<number[]>;
-  getNewUsersActivityMethod$: (date: Date) => Observable<number[]>;
   getReturningUsersActivityMethod$: (date: Date) => Observable<number[]>;
 }
 
@@ -45,7 +44,6 @@ export class UsersNewVsReturningCardComponent implements AfterViewInit, OnChange
     this.timeRangeActionsTypes.set(
       TIME_RANGE.DAY, {
         getUsersActivityMethod$: this.users.getDailyUsersActivity,
-        getNewUsersActivityMethod$: this.users.getDailyNewUsersActivity,
         getReturningUsersActivityMethod$: this.users.getDailyReturningUsersActivity,
         xAxesLabel: 'Hour'
       }
@@ -53,7 +51,6 @@ export class UsersNewVsReturningCardComponent implements AfterViewInit, OnChange
     this.timeRangeActionsTypes.set(
       TIME_RANGE.WEEK, {
         getUsersActivityMethod$: this.users.getWeeklyUsersActivity,
-        getNewUsersActivityMethod$: this.users.getWeeklyNewUsersActivity,
         getReturningUsersActivityMethod$: this.users.getWeeklyReturningUsersActivity,
         xAxesLabel: 'Day in Week'
       }
@@ -61,7 +58,6 @@ export class UsersNewVsReturningCardComponent implements AfterViewInit, OnChange
     this.timeRangeActionsTypes.set(
       TIME_RANGE.MONTH, {
         getUsersActivityMethod$: this.users.getMonthlyUsersActivity,
-        getNewUsersActivityMethod$: this.users.getMonthlyNewUsersActivity,
         getReturningUsersActivityMethod$: this.users.getMonthlyReturningUsersActivity,
         xAxesLabel: 'Day in Month'
       }
@@ -95,12 +91,10 @@ export class UsersNewVsReturningCardComponent implements AfterViewInit, OnChange
   public refreshTotalData() {
     zip(
       this.selectedTimeRangeActions.getUsersActivityMethod$.call(this.users, this.date),
-      this.selectedTimeRangeActions.getNewUsersActivityMethod$.call(this.users, this.date),
       this.selectedTimeRangeActions.getReturningUsersActivityMethod$.call(this.users, this.date)
     ).pipe(
-      map(([datasetTotal, datasetNew, datasetReturning]: [number[], number[], number[]]) => [
+      map(([datasetTotal, datasetReturning]: [number[], number[]]) => [
         { data: datasetTotal, label: `Total`},
-        { data: datasetNew, label: `New`},
         { data: datasetReturning, label: `Returning`}
       ])
     ).subscribe((newData) => this.usersChart.setChartData(newData, this.selectedTimeRangeActions.xAxesLabel));

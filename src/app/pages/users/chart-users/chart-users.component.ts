@@ -36,7 +36,7 @@ export class ChartUsersComponent {
   };
 
   lineChartColors: Color[] = [
-    { //  light
+    { //  violet
       backgroundColor: 'rgba(255,159,255,0.2)',
       borderColor: 'rgba(77,83,96,1)',
       pointBackgroundColor: 'rgba(77,83,96,1)',
@@ -44,13 +44,13 @@ export class ChartUsersComponent {
       pointHoverBackgroundColor: '#fff',
       pointHoverBorderColor: 'rgba(77,83,96,1)'
     },
-    { // dark
+    { // orange line
       backgroundColor: 'rgba(0, 0, 0, 0.0)',
-      borderColor: 'rgba(148,159,177,1)',
-      pointBackgroundColor: 'rgba(148,159,177,1)',
+      borderColor: 'rgba(228, 175, 77,1)',
+      pointBackgroundColor: 'rgba(228, 175, 77,1)',
       pointBorderColor: '#fff',
       pointHoverBackgroundColor: '#fff',
-      pointHoverBorderColor: 'rgba(148,159,177,0.8)'
+      pointHoverBorderColor: 'rgba(228, 175, 77,0.8)'
     },
   ];
 
