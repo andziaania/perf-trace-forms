@@ -9,7 +9,10 @@ import { NbDummyAuthStrategy, NbAuthModule } from '@nebular/auth';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
+/* This module provides an interceptor that mocks the results for the HTTP requests.
+ * This should be commented if there is a server side for this app implemented.*/
 // import { MockBackendModule } from './mock-backend/mock-backend.module';
+
 
 
 @NgModule({
@@ -37,8 +40,8 @@ import { AppRoutingModule } from './app-routing.module';
     }),
     NbDatepickerModule.forRoot(),
 
-    // Provides an interceptor that mocks the results for the HTTP requests.
-    // Remove if there is a server side for this app implemented.
+    /* This module provides an interceptor that mocks the results for the HTTP requests.
+     * This should be commented if there is a server side for this app implemented.*/
     // MockBackendModule.forRoot()
   ],
   providers: [],

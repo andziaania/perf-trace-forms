@@ -18,6 +18,7 @@ export class UsersService {
 
   constructor(private http: HttpClient) { }
 
+  // total
   getDailyUsersActivity(date: Date): Observable<number[]> {
     const reqUrl = `${URL}/${UTYPE_TOTAL}/${RANGE_DAY}?date=${date.toISOString()}`;
     return this.http.get<number[]>(reqUrl);
@@ -33,7 +34,7 @@ export class UsersService {
     return this.http.get<number[]>(reqUrl);
   }
 
-
+  // new users
   getDailyNewUsersActivity(date: Date):  Observable<number[]> {
     const reqUrl = `${URL}/${UTYPE_NEW}/${RANGE_DAY}?date=${date.toISOString()}`;
     return this.http.get<number[]>(reqUrl);
@@ -48,7 +49,7 @@ export class UsersService {
     return this.http.get<number[]>(reqUrl);
   }
 
-
+  // returning users
   getDailyReturningUsersActivity(date: Date):  Observable<number[]> {
     const reqUrl = `${URL}/${UTYPE_RETURNING}/${RANGE_DAY}?date=${date.toISOString()}`;
     return this.http.get<number[]>(reqUrl);
