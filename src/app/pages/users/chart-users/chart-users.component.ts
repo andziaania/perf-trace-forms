@@ -19,12 +19,13 @@ export class ChartUsersComponent {
       xAxes: [{
           scaleLabel: {
               display:     true,
-              labelString: 'Date'
+              labelString: 'Hour'
           }
       }],
       yAxes: [{
         ticks: {
-          callback: value => (value % 1 === 0) ? value : undefined ,  // digital scale
+          callback: value => (value % 1 === 0) ? value : undefined ,  // digital scale,
+          min: 0
         },
         scaleLabel: {
             display:     true,
@@ -96,7 +97,8 @@ export class ChartUsersComponent {
   }
 
   private generateLabels(dataSize: number) {
-    return new Array(dataSize).fill('').map((item, index) => (index + 1).toString());
+    const startIndex = (dataSize === 24) ? 0 : 1;
+    return new Array(dataSize).fill('').map((item, index) => (index + startIndex).toString());
   }
 
   private changeXAxesLabel(newXLabel: string) {
@@ -112,7 +114,8 @@ export class ChartUsersComponent {
         }],
         yAxes: [{
           ticks: {
-            callback: value => (value % 1 === 0) ? value : undefined ,  // digital scale
+            callback: value => (value % 1 === 0) ? value : undefined ,  // digital scale,
+            min: 0
           },
           scaleLabel: {
               display:     true,
