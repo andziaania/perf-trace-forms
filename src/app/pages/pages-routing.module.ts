@@ -13,7 +13,9 @@ const routes: Routes = [
     children: [
       { path: 'about', component: AboutComponent },
       { path: 'users', component: UsersComponent },
+
       { path: '', redirectTo: 'about', pathMatch: 'full'},
+      { path: 'perf-trace', redirectTo: 'users', pathMatch: 'full' },
     ],
   }
 ];
