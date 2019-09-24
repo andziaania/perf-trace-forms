@@ -12,6 +12,8 @@ import { ChartUsersComponent } from './users/chart-users/chart-users.component';
 import { UsersTotalComponent } from './users/users-total-card/users-total-card.component';
 import { UsersNewVsReturningCardComponent } from './users/users-new-vs-returning-card/users-new-vs-returning-card.component';
 import { AboutComponent } from './about/about.component';
+import { PerformanceComponent } from './performance/performance.component';
+import { ChartPageLoadingComponent } from './performance/chart-page-loading/chart-page-loading.component';
 
 
 @NgModule({
@@ -22,6 +24,8 @@ import { AboutComponent } from './about/about.component';
     UsersTotalComponent,
     UsersNewVsReturningCardComponent,
     AboutComponent,
+    PerformanceComponent,
+    ChartPageLoadingComponent,
   ], imports: [
     CommonModule,
     PagesRoutingModule,

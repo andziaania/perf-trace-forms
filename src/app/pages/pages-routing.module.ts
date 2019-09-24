@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { UsersComponent } from './users/users.component';
 import { AboutComponent } from './about/about.component';
+import { PerformanceComponent } from './performance/performance.component';
 
 
 
@@ -13,6 +14,7 @@ const routes: Routes = [
     children: [
       { path: 'about', component: AboutComponent },
       { path: 'users', component: UsersComponent },
+      { path: 'performance', component: PerformanceComponent },
 
       { path: '', redirectTo: 'about', pathMatch: 'full'},
       { path: 'perf-trace', redirectTo: 'users', pathMatch: 'full' },

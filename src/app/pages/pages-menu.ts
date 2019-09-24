@@ -11,53 +11,10 @@ export const APP_MENU: NbMenuItem[] = [
     icon: 'people-outline',
     link: '/pages/users',
     home: true,
-    expanded: true,
-    children: [
-      {
-        title: 'Statistics',
-        link: '/pages/users',
-      },
-      {
-        title: 'Currently',
-        link: ''
-      },
-      {
-        title: 'Users info (browser, geo)',
-        link: ''
-      },
-      {
-        title: 'Engagement',
-        link: ''
-      }
-    ],
-  },
-  {
-    title: 'Pages',
-    icon: 'browser-outline',
-    link: '/pages/pages-stats',
-    expanded: true,
-    children: [
-      {
-        title: 'Statistics',
-        link: '/pages-stats',
-      },
-      {
-        title: 'Enter pages',
-        link: ''
-      },
-      {
-        title: 'Exit pages',
-        link: ''
-      }
-    ],
   },
   {
     title: 'Site Performance',
     icon: 'pie-chart-outline',
-    link: ''
-  },
-  {
-    title: 'FEATURES',
-    group: true,
+    link: '/pages/performance',
   },
 ];
