@@ -1,5 +1,5 @@
   <nb-card class="chart-card">
-    <nb-card-header>The number of users that wisit Perf Trace. The session time for returning users is 3 minutes. Data from the past 100 days from the server start are randomly generated. Data since then (including today) are collected.</nb-card-header>
+    <nb-card-header>The number of users that visit Perf Trace. The session time for returning users is 3 minutes. Data from the past 100 days from the server start are randomly generated. Data since then (including today) are collected.</nb-card-header>
     <nb-card-body>
       <nb-select [(selected)]="selectedTimeRange" size="tiny" class="mr-1">
         <nb-option *ngFor="let timeRange of timeRanges" [value]="timeRange">{{ timeRange }}</nb-option>

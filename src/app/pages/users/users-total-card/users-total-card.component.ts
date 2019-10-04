@@ -107,13 +107,13 @@ export class UsersTotalComponent implements AfterViewInit, OnChanges {
   // private methods
 
   private calculatePreviousDateByDays(days: number): Date {
-    const date = new Date();
+    const date = new Date(this.date.getTime());
     date.setDate(this.date.getDate() - days);
     return date;
   }
 
   private calculatePreviousMonth(): Date {
-    const date = new Date();
+    const date = new Date(this.date.getTime());
     date.setMonth(this.date.getMonth() - 1);
     return date;
   }
