@@ -24,6 +24,7 @@
     },
 
     postPath: function() {
+      console.log(window.location.pathname)
       const param = {
         path: window.location.pathname
       }
@@ -31,36 +32,21 @@
     }
   }
 
-  const recordingOnPageCallbacks = Object.getOwnPropertyNames(recordingOnPageFunctions)
-          .filter(propName => typeof recordingOnPageFunctions[propName] === 'function')
-          .map(propName => recordingOnPageFunctions[propName]);
-
-
-
   function initSession() {
 
-    function addRecordingForEachRequest() {
-      const nativeOpen = XMLHttpRequest.prototype.open;
-      const postWhenReady = function() {
-        this.addEventListener("readystatechange", function() {
-          console.log(this.readyState);
-
-          if (this.readyState == 4 && !this.responseURL.includes(PT_RECORDER_URL)) {
-            recordingOnPageCallbacks.forEach(callback => callback())
-          }
-          console.log(this.readyState);
-        }, false);
-      }
-
-      XMLHttpRequest.prototype.open = function(method, url, async, user, pass) {
-        postWhenReady.apply(this);
-        nativeOpen.apply(this, [].slice.call(arguments));
-      }
+    addPathChangeListener = function(listenerFunction) {
+      var pushState = window.history.pushState;
+      window.history.pushState = function () {
+        console.info("adding listener on path change")
+          pushState.apply(history, arguments);
+          listenerFunction();
+      };
     }
 
     const initSessionCallback = function() {
-      recordingOnPageCallbacks.forEach(callback => callback());
-      addRecordingForEachRequest();
+      recordingOnPageFunctions.postPageLoadingPerformance();
+      recordingOnPageFunctions.postPath();
+      addPathChangeListener(recordingOnPageFunctions.postPath);
     }
 
     post('/initializeSession', undefined, initSessionCallback);
