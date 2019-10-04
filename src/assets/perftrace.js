@@ -1,17 +1,16 @@
 (function(window){
 
-  function post(url, bodyParams, callbacks) {
-    PT_RECORDER_URL = '/api/recorder';
+  PT_RECORDER_URL = '/api/recorder';
+
+  function post(url, bodyParams, callback) {
     console.log('POSTING: ' + url);
     const body = JSON.stringify(bodyParams);
 
     const req = new XMLHttpRequest();
-    req.open("POST", this.PT_RECORDER_URL + url, true);
+    req.open("POST", PT_RECORDER_URL + url, true);
     req.setRequestHeader("Content-Type", "application/json");
     req.withCredentials = true; // pass along cookies
-    if (callbacks) {
-      req.onload = () => { callbacks.forEach(callback => callback()) };
-    }
+    req.onload = () => { if (callback) callback() };
     req.send(body);
   }
 
@@ -37,8 +36,34 @@
           .map(propName => recordingOnPageFunctions[propName]);
 
 
-  function initSession(callbacks) {
-    post('/initializeSession', undefined, callbacks);
+
+  function initSession() {
+
+    function addRecordingForEachRequest() {
+      const nativeOpen = XMLHttpRequest.prototype.open;
+      const postWhenReady = function() {
+        this.addEventListener("readystatechange", function() {
+          console.log(this.readyState);
+
+          if (this.readyState == 4 && !this.responseURL.includes(PT_RECORDER_URL)) {
+            recordingOnPageCallbacks.forEach(callback => callback())
+          }
+          console.log(this.readyState);
+        }, false);
+      }
+
+      XMLHttpRequest.prototype.open = function(method, url, async, user, pass) {
+        postWhenReady.apply(this);
+        nativeOpen.apply(this, [].slice.call(arguments));
+      }
+    }
+
+    const initSessionCallback = function() {
+      recordingOnPageCallbacks.forEach(callback => callback());
+      addRecordingForEachRequest();
+    }
+
+    post('/initializeSession', undefined, initSessionCallback);
   }
 
 /*******************************************/
@@ -46,7 +71,8 @@
     console.log('perf-trace is perfect to trace!');
 
     setTimeout(function(){
-      initSession(recordingOnPageCallbacks);
+      initSession();
     }, 0);
+
   }
 })(window)
