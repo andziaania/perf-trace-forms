@@ -14,7 +14,12 @@ export const APP_MENU: NbMenuItem[] = [
   },
   {
     title: 'Site Performance',
-    icon: 'pie-chart-outline',
+    icon: 'activity-outline',
     link: '/pages/performance',
+  },
+  {
+    title: 'Pages Statistics',
+    icon: 'archive-outline',
+    link: '/pages/urls',
   },
 ];

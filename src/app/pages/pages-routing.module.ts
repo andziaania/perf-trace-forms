@@ -1,3 +1,4 @@
+import { UrlsComponent } from './urls/urls.component';
 import { PagesComponent } from './pages.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
@@ -15,6 +16,7 @@ const routes: Routes = [
       { path: 'about', component: AboutComponent },
       { path: 'users', component: UsersComponent },
       { path: 'performance', component: PerformanceComponent },
+      { path: 'urls', component: UrlsComponent },
 
       { path: '', redirectTo: 'about', pathMatch: 'full'},
       { path: 'perf-trace', redirectTo: 'users', pathMatch: 'full' },
