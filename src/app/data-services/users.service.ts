@@ -4,7 +4,6 @@ import { Observable } from 'rxjs';
 
 const URL = 'api/users';
 const UTYPE_TOTAL = 'total';
-const UTYPE_NEW = 'new';
 const UTYPE_RETURNING = 'returning';
 const RANGE_DAY = 'day';
 const RANGE_WEEK = 'week';

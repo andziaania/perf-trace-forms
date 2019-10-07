@@ -38,8 +38,8 @@
       var pushState = window.history.pushState;
       window.history.pushState = function () {
         console.info("adding listener on path change")
-          pushState.apply(history, arguments);
-          listenerFunction();
+        pushState.apply(history, arguments);
+        listenerFunction();
       };
     }
 

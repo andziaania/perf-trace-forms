@@ -1,5 +1,5 @@
 import { ChartPageLoadingComponent } from './chart-page-loading/chart-page-loading.component';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, AfterViewInit, ViewChild } from '@angular/core';
 import { PerformanceService } from 'src/app/data-services/performance.service';
 import { map } from 'rxjs/operators';
 
@@ -8,13 +8,13 @@ import { map } from 'rxjs/operators';
   templateUrl: './performance.component.html',
   styleUrls: ['./performance.component.scss']
 })
-export class PerformanceComponent implements OnInit {
+export class PerformanceComponent implements AfterViewInit {
 
   @ViewChild(ChartPageLoadingComponent, {static: false}) chartPageLoading: ChartPageLoadingComponent;
 
   constructor(private performanceService: PerformanceService) {}
 
-  ngOnInit() {
+  ngAfterViewInit() {
     this.performanceService.getPageLoadingStatistics().pipe(
       map((datasetTotal: number[]) => [
         { data: datasetTotal, label: `Loading Performance [ms]`},

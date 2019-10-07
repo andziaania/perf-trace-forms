@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { BaseChartDirective } from 'ng2-charts';
 
 @Component({
   selector: 'pt-chart-urls-proportions',
@@ -7,13 +8,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ChartUrlsProportionsComponent implements OnInit {
 
-  public pieChartLabels = ['01', '02', '03', '04'];
-  public pieChartData = [231, 354, 53, 42];
+  @ViewChild(BaseChartDirective, { static: false }) chart: BaseChartDirective;
+
+  public pieChartLabels = ['UPSSS... No data ;P'];
+  public pieChartData = [1];
   public pieChartType = 'pie';
 
   constructor() { }
 
   ngOnInit() {
+  }
+
+  public setChartData(data: number[], labels: string[]) {
+    this.pieChartData = data;
+    this.pieChartLabels = labels;
+    this.chart.update();
   }
 
 }
